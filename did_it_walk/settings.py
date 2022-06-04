@@ -129,5 +129,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-# auth 유저모델 설정
-AUTH_USER_MODEL = 'user.User'
+# 베이스 유저 모델
+AUTH_USER_MODEL = 'user.UserModel'
