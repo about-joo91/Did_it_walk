@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
 from .models import UserModel
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def sign_up(request):
@@ -27,3 +28,8 @@ def sign_in(request):
             return render(request,'success.html',{'msg' : '성공'})
         return render(request, 'success.html', {'msg': '아이디/비밀번호를 확인하세요'})
     return render(request, 'user/sign_in.html')
+
+@login_required
+def sign_out(request):
+    auth.logout(request)
+    return render(request, 'success.html',{'msg': '로그아웃 됨'})
