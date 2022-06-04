@@ -50,6 +50,8 @@ html{
 }
 /* 탑 가운데의 제목, 로고 */
 .t_middle_title{
+    display: flex;
+    flex-direction: column;
     width: 18.8rem;
     height: 96.6rem;
     border: 1px solid black;
@@ -71,6 +73,7 @@ html{
     align-items: center;
     margin-top: 23.2rem;
     border: 1px solid black;
+    writing-mode: vertical-lr;
 }
 /* 탑 오른쪽의 추천 태그부분 */
 .t_right_tag{
@@ -193,10 +196,7 @@ html{
     display: flex;
 }
 .bt_pb_pt_ct_us_profile_img{
-    width: 3.7rem;
-    height: 3.7rem;
     border-radius: 50%;
-    background-image: url('https://images.unsplash.com/photo-1512374382149-233c42b6a83b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHNob2VzfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60');
 }
 .bt_pb_pt_ct_us_profile_name{
     width: 20.4rem;
