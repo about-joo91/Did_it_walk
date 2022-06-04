@@ -15,7 +15,8 @@
 
 ## ERD
 
-![ㄷㅅㄱ](https://user-images.githubusercontent.com/55477835/171785683-68178d25-8966-44f1-be64-a03c80c7a576.png)
+![크 완벽하다](https://user-images.githubusercontent.com/55477835/172005679-d96bb977-02bb-4683-acaa-2846dca58111.png)
+
 
 ## 역할분담 
 
