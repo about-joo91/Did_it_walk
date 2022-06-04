@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href={% static 'css/main.css' %}>
+    <title>눈이 너무</title>
+
+</head>
+<body>
+    <div class="wrap">
+        <div class="upload_modal_background">
+            <div class="upload_modal">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Upload</button>
+                </form>
+            </div>
+        </div>
+        <div class="top">
+            <div class="t_left_image">
+            </div>
+            <div class="t_middle_title">
+                <div class="t_mt_title">ㄷㅅㄱ</div>
+                <div class="t_mt_logo">딛<br>고<br><br>서<br>고<br><br>걷<br>다</div>
+            </div>
+            <div class="t_right_tag">
+                <div class="t_rt_subtitle">
+                    <div class="t_rt_st_tag">추천 신발 태그</div>
+                </div>
+                <div class="t_rt_images_box">
+                    <div class="t_rt_ib_images"></div>
+                    <div class="t_rt_ib_images"></div>
+                    <div class="t_rt_ib_images"></div>
+                    <div class="t_rt_ib_images"></div>  
+                </div>
+            </div>
+        </div>
+        <div class="middle">
+            <div class="m_subheader">
+                <div class="m_sb_recency">최신</div>
+                <div class="m_sb_suggest">추천</div>
+                <div class="m_sb_following">팔로잉</div>
+            </div>
+        </div>
+        <div class="button" onclick="open_modal()">+</div>
+        <div class="bottom">
+                <div class="bt_pb_post">
+                    <div class="bt_pb_pt_img"><img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8c2hvZXN8ZW58MHwxfDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="" width="300"></div>
+                    <div class="bt_pb_pt_content">
+                        <div class="bt_pb_pt_ct_user">
+                            <div class="bt_pb_pt_ct_us_profile_img"></div>
+                            <div class="bt_pb_pt_ct_us_profile_name">about_zoo</div>
+                        </div>
+                        <div class="bt_pb_pt_ct_comment">~~~어때서 좋다.</div>
+                        <div class="bt_pb_pt_ct_likes_comments">좋아요x개 댓글x개</div>
+                        <div class="bt_pb_pt_ct_shoe_tag">
+                            <div class="bt_pb_pt_ct_st_img"></div>
+                            <div class="bt_pb_pt_ct_st_tag_inpo">
+                                <div class="bt_pb_ct_st_ti_tag_name">염기호 x 주정한 에디션 1번 블라크</div>
+                                <div class="bt_pb_ct_st_ti_tag_price">가격 14,350,000원</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bt_pb_post">
+                    <div class="bt_pb_pt_img"><img src="https://images.unsplash.com/photo-1589807751586-b5c674fd737c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjd8fHNob2VzfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="" width="300"></div>
+                    <div class="bt_pb_pt_content">
+                        <div class="bt_pb_pt_ct_comment">~~~어때서 좋다.</div>
+                        <div class="bt_pb_pt_ct_likes_comments">좋아요x개 댓글x개</div>
+                        <div class="bt_pb_pt_ct_shoe_tag">
+                            <div class="bt_pb_pt_ct_st_img"></div>
+                            <div class="bt_pb_pt_ct_st_tag_inpo">
+                                <div class="bt_pb_ct_st_ti_tag_name">염기호 x 주정한 에디션 1번 블라크</div>
+                                <div class="bt_pb_ct_st_ti_tag_price">가격 14,350,000원</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+    
+</body>
+<script src={% static 'js/main.js' %}></script>
+</html>

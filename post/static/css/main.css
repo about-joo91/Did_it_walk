@@ -1,0 +1,226 @@
+html{
+    font-size: 62.5%;
+    width: 172.8rem;
+    margin: 0 auto;
+    
+}
+/* 모달부분 */
+.upload_modal_background{
+    background : rgba(0, 0, 0, 0.7);
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    display: none;
+}
+.upload_modal{
+    width: 30rem;
+    height: 20rem;
+    background-color: white;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5%;
+    z-index: 3;
+}
+
+
+.top{
+    border: 1px solid black;
+    width: 100%;
+    height: 111.7rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /* align-items: center; */
+    margin: 0 auto;
+}
+/* 탑 왼쪽의 이미지 */
+.t_left_image{
+    width: 54rem;
+    height: 71.5rem;
+    border: 1px solid black;
+    border-radius: 40px;
+    margin-top: 26.9rem;
+}
+/* 탑 가운데의 제목, 로고 */
+.t_middle_title{
+    width: 18.8rem;
+    height: 96.6rem;
+    border: 1px solid black;
+    margin: 4.15rem 5.7rem 0 5.7rem;
+
+}
+.t_mt_title{
+    width: 18.8rem;
+    height: 5.56rem;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.t_mt_logo{
+    font-size: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 23.2rem;
+    border: 1px solid black;
+}
+/* 탑 오른쪽의 추천 태그부분 */
+.t_right_tag{
+    width: 61.9rem;
+    height: 77.9rem;
+    border: 1px solid black;
+    margin-top: 15.2rem;
+}
+.t_rt_subtitle{
+    width: 100%;
+    height: 6.5rem;
+    border: 1px solid blue;
+}
+.t_rt_st_tag{
+    width: 30.8rem;
+    height: 6.5rem;
+    border: 1px solid red;
+    margin: 0 auto;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.t_rt_images_box{
+    width: 61.9rem;
+    height: 64.1rem;
+    border: 1px solid blue;
+    display: flex;
+    justify-content: space-between;
+    align-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 7.3rem;
+}
+.t_rt_ib_images{
+    width: 25.9rem;
+    height: 25.2rem;
+    border: 1px solid red;
+    border-radius: 40px;
+}
+/* 여기부터는 중단에 최신 추천 팔로잉 */
+.middle{
+    width: 100%;
+    height: 5,7rem;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.m_subheader{
+    width: 50rem;
+    height: 100%;
+    border: 1px solid blue;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.m_sb_recency{
+    width: 13.3rem;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.m_sb_suggest{
+    width: 13.3rem;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.m_sb_following{
+    width: 13.3rem;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.button{
+    width: 8rem;
+    height: 8rem;
+    border-radius: 25px;
+    position: fixed;
+    left: 85%;
+    top: 90%;
+    background-color: green;
+}
+/* 여기부터 bottom 게시물들 모아놓은 곳 */
+.bottom{
+    width: 100%;
+    border: 1px solid black;
+    display: flex;
+    /* justify-content: space-between; */
+    flex-wrap: wrap;
+}
+.bt_pb_post{
+    width: 30rem;
+    height: auto;
+    border: 1px solid black;
+    margin: 0 6.2rem 2rem 6.2rem;
+}
+.bt_pb_pt_img{
+    width: 30rem;
+    border-radius: 40px;
+}
+
+/* width가 30인데 margin-left때문에 29 */
+.bt_pb_pt_content{
+    width: 29rem;
+    height: 16.5rem;
+    border: 1px solid blue;
+    margin-top: 1.5rem;
+    font-size: 17px;
+    margin-left: 1rem;
+    /* display: flex; */
+}
+.bt_pb_pt_ct_user{
+    width: 100%;
+    height: 3.7rem;
+    border: 1px solid blue;
+    display: flex;
+}
+.bt_pb_pt_ct_us_profile_img{
+    width: 3.7rem;
+    height: 3.7rem;
+    border-radius: 50%;
+    background-image: url('https://images.unsplash.com/photo-1512374382149-233c42b6a83b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHNob2VzfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60');
+}
+.bt_pb_pt_ct_us_profile_name{
+    width: 20.4rem;
+    margin-left: 1.2rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.bt_pb_pt_ct_comment{
+    width: 30rem;
+    margin-top: 1rem;
+}
+.bt_pb_pt_ct_likes_comments{
+    width: 30rem;
+    margin-top: 0.5rem;
+}
+.bt_pb_pt_ct_shoe_tag{
+    width: 30rem;
+    margin-top: 0.5rem;
+    display: flex;
+}
+.bt_pb_pt_ct_st_img{
+    width: 8rem;
+    height: 8rem;
+    border-radius: 20px;
+    border: 1px solid red;
+}

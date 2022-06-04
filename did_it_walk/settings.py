@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'upload_test',
     'user',
+    'post',
 ]
 
 MIDDLEWARE = [
