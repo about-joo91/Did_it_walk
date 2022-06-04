@@ -1,19 +1,24 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko-KR">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href={% static 'css/user_base.css' %}>
     <title>Document</title>
 </head>
 
 <body>
-    <div class="left_line_text">
-
-    </div>
-    <div class="right_content">
-        {% block content %}{% endblock  %}
+    <div class="main_body">
+        <div class="mb_left_line_text">
+            딛고 걷고 서다
+        </div>
+        <div class="mb_right_content">
+            <div class="mb_rc_title">ㄷㅅㄱ</div>
+            {% block content %}{% endblock  %}
+        </div>
     </div>
 </body>
 </html>

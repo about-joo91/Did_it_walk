@@ -3,10 +3,14 @@
 {% block content %}
 <form method="post" action={% url 'sign_in' %}>
     {% csrf_token %}
-    <label for="username">이메일 주소</label>
-    <input type="email" id="username" name="username">
-    <label for="password">비밀번호</label>
-    <input type="password" id="password" name="password">
-    <button type="submit">로그인</button>
+    <label class="sign_in_label" for="username">
+        이메일 주소
+    </label>
+    <input class="user_input" lang="en" type="email" id="username" name="username"/>
+    <label class="sign_in_label" for="password">
+        비밀번호
+    </label>
+    <input class="user_input" lang="en" type="password"  id="password" name="password"/>   
+    <button class="sign_in_btn" type="submit">로그인</button>
 </form>
 {% endblock %}

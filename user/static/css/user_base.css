@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Hi+Melody&family=Indie+Flower&display=swap');
+
+*:lang(ko-KR) {
+    font-family: 'Hi Melody';
+}
+
+*:lang(en) {
+    font-family: 'Indie Flower';
+}
+
+* {
+    background-color: #F1F1EB;
+}
+
+.body,
+.html {
+    height: 100vh;
+    width: 100vw;
+}
+
+.main_body {
+    display: flex;
+}
+
+
+.mb_left_line_text {
+    margin: 17rem 10rem 0 20rem;
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    font-size: 70px;
+}
+
+.mb_right_content {
+    margin: 14rem 0 0 5rem;
+}
+
+.mb_rc_title {
+    margin-left: 3.5rem;
+    color: #53AA45;
+    letter-spacing: -0.47em;
+    font-size: 7.4rem;
+}
+
+label,
+input {
+    display: block;
+}
+
+.user_input {
+    width: 300px;
+    height: 50px;
+    border-radius: 15px;
+    background-color: white;
+    font-size: 23px;
+    border: none;
+    text-align: center;
+}
+
+.sign_in_label {
+    margin-top: 2.5rem;
+    font-size: 30px;
+}
+
+.sign_in_btn {
+    margin-top: 6rem;
+    width: 300px;
+    height: 50px;
+    color: white;
+    background-color: #53AA45;
+    border-radius: 15px;
+    border: none;
+    font-size: 30px;
+}
+
+.sign_up_label {
+    margin-top: 1rem;
+    font-size: 30px;
+}
+
+.sign_up_btn {
+    margin-top: 3.5rem;
+    width: 300px;
+    height: 50px;
+    color: white;
+    background-color: #53AA45;
+    border-radius: 15px;
+    border: none;
+    font-size: 30px;
+}
