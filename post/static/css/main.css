@@ -165,13 +165,6 @@ html{
     /* justify-content: space-between; */
     flex-wrap: wrap;
 }
-/* .bt_posts_box{
-    width: 150rem;
-    height: auto;
-    border: 1px solid blue;
-    display: flex;
-    justify-content: space-between;
-} */
 .bt_pb_post{
     width: 30rem;
     height: auto;
@@ -181,11 +174,8 @@ html{
 .bt_pb_pt_img{
     width: 30rem;
     border-radius: 40px;
-    /* background-size: 100%;
-    background-repeat: no-repeat;
-    background-position: center; */
-    /* background-image: url('https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c2hvZXN8ZW58MHwxfDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60'); */
 }
+
 /* width가 30인데 margin-left때문에 29 */
 .bt_pb_pt_content{
     width: 29rem;

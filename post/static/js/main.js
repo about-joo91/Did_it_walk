@@ -14,9 +14,6 @@ function open_modal(){
     let small_modal_body = document.querySelector('.upload_modal');
     small_modal_body.style.left = modal_left_now + "px";
     small_modal_body.style.top = modal_top_now + "px";
-    small_modal.style.display = 'flex';
-    small_modal.style.justifycontent = 'center';
-    small_modal.style.alignitems = "center"; 
 }
 
  function close_modal(){
