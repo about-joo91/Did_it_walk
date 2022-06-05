@@ -33,3 +33,10 @@ def sign_in(request):
 def sign_out(request):
     auth.logout(request)
     return render(request, 'success.html',{'msg': '로그아웃 됨'})
+
+@login_required
+def follow_page(request):
+    cur_user = request.user
+    user_list = UserModel.objects.all().exclude(username = cur_user.username).exclude(followee=cur_user)
+    followers = UserModel.objects.filter(followee = cur_user)
+    return render(request, 'user/follower.html', {'users':user_list,'followers':followers})
