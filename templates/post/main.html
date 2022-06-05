@@ -13,11 +13,11 @@
     <div class="wrap">
         <div class="upload_modal_background">
             <div class="upload_modal">
-                <form method="post" enctype="multipart/form-data">
+                <form id="form1" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit">Upload</button>
+                    <!-- {{ form.as_p }} -->
                 </form>
+                <button form="form1" type="submit">Upload</button>
             </div>
         </div>
         <div class="top">
