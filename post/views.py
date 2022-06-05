@@ -8,11 +8,10 @@ def home(request):
     #     return redirect('main')
     # else:
     #     return redirect('/user/sign_in')
-    return redirect('/main')
+    return redirect('/post/home')
 
 def main(request):
     if request.method == 'POST':
-        print("post방식이다.")
         form = UploadForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
