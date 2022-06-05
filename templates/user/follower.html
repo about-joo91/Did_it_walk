@@ -10,14 +10,14 @@
     <div>
         user_list
         {% for user in users%}
-            <a href=>{{ user.nickname}}</a>
+            <a href={% url 'follow' user.pk%}>{{ user.nickname}}</a>
         {% endfor %}
     </div>
 
     <div>
         follower
         {% for follower in followers %}
-        <a href=>{{follower.nickname}}</a>
+        <a href= {% url 'follow' follower.pk%}>{{follower.nickname}}</a>
         {% endfor %}
     </div>
 </body>
