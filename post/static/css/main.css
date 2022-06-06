@@ -28,7 +28,16 @@ html{
     border-radius: 5%;
     z-index: 3;
 }
-
+.upload_file_form{
+    visibility: hidden !important;
+}
+.um_preview_images{
+    visibility: visible;
+    z-index: 5;
+    width: 400px;
+    height: 600px;
+    background-color: green;
+}
 
 /* 여기부터 top */
 .top{

@@ -13,11 +13,12 @@
     <div class="wrap">
         <div class="upload_modal_background">
             <div class="upload_modal">
-                <form id="form1" method="post" enctype="multipart/form-data">
+                <form id="upload_file_form" class="upload_file_form" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <!-- {{ form.as_p }} -->
+                    <input type="file" name="input_file" id="input_file">
                 </form>
-                <button form="form1" type="submit">Upload</button>
+                <div class="upload_file_image"></div>
+                <button form="upload_file_form" type="submit">Upload</button>
             </div>
         </div>
         <div class="top">
@@ -48,24 +49,26 @@
         </div>
         <div class="button" onclick="open_modal()">+</div>
         <div class="bottom">
-                <div class="bt_pb_post">
-                    <div class="bt_pb_pt_img"><img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8c2hvZXN8ZW58MHwxfDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="" width="300"></div>
-                    <div class="bt_pb_pt_content">
-                        <div class="bt_pb_pt_ct_user">
-                            <div class="bt_pb_pt_ct_us_profile_img"><img src="https://images.unsplash.com/photo-1512374382149-233c42b6a83b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHNob2VzfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60" width="37" height="37" alt=""></div>
-                            <div class="bt_pb_pt_ct_us_profile_name">about_zoo</div>
-                        </div>
-                        <div class="bt_pb_pt_ct_comment">~~~어때서 좋다.</div>
-                        <div class="bt_pb_pt_ct_likes_comments">좋아요x개 댓글x개</div>
-                        <div class="bt_pb_pt_ct_shoe_tag">
-                            <div class="bt_pb_pt_ct_st_img"></div>
-                            <div class="bt_pb_pt_ct_st_tag_inpo">
-                                <div class="bt_pb_ct_st_ti_tag_name">염기호 x 주정한 에디션 1번 블라크</div>
-                                <div class="bt_pb_ct_st_ti_tag_price">가격 14,350,000원</div>
-                            </div>
+            {% for post_img in post_imgs %}
+            <div class="bt_pb_post">
+                <div class="bt_pb_pt_img"><img src="{{ post_img.post_img_url.url }}" alt="" width="300"></div>
+                <div class="bt_pb_pt_content">
+                    <div class="bt_pb_pt_ct_user">
+                        <div class="bt_pb_pt_ct_us_profile_img"><img src="https://images.unsplash.com/photo-1512374382149-233c42b6a83b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHNob2VzfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60" width="37" height="37" alt=""></div>
+                        <div class="bt_pb_pt_ct_us_profile_name">about_zoo</div>
+                    </div>
+                    <div class="bt_pb_pt_ct_comment">~~~어때서 좋다.</div>
+                    <div class="bt_pb_pt_ct_likes_comments">좋아요x개 댓글x개</div>
+                    <div class="bt_pb_pt_ct_shoe_tag">
+                        <div class="bt_pb_pt_ct_st_img"></div>
+                        <div class="bt_pb_pt_ct_st_tag_inpo">
+                            <div class="bt_pb_ct_st_ti_tag_name">염기호 x 주정한 에디션 1번 블라크</div>
+                            <div class="bt_pb_ct_st_ti_tag_price">가격 14,350,000원</div>
                         </div>
                     </div>
                 </div>
+            </div>
+            {% endfor %}
             
         </div>
     </div>
