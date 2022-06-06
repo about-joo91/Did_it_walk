@@ -30,9 +30,9 @@ def main(request):
             input_content = request.POST.get('input_content')
             if input_image and input_content :
                 Posts_info = Posts(contents = input_content, users = user_data)
-                posts_img_url_info = Post_Img(posts = Posts_info, post_img_url = input_image)
                 Posts_info.save()
-                posts_img_url_info.save()
+                Post_Img(posts = Posts_info, post_img_url = input_image).save
+                
                 return redirect('/post/home')
             else : 
                 messages.info(request, 'image나 content가 비어있습니다.')
