@@ -7,4 +7,5 @@ class Post(models.Model):
     class Meta:
         db_table = 'post'
 
+
     post_img_url = models.ImageField(upload_to='media/')

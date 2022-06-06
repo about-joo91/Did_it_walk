@@ -127,7 +127,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # 미디어 루트 지정
 MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_ROOT = Path.joinpath(BASE_DIR , 'media')
 
 # 베이스 유저 모델
 AUTH_USER_MODEL = 'user.UserModel'
