@@ -30,6 +30,9 @@ html{
 }
 .upload_file_form{
     visibility: hidden !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .um_preview_images{
     visibility: visible;
@@ -38,7 +41,13 @@ html{
     height: 600px;
     background-color: green;
 }
-
+.input_content{
+    visibility: visible;
+}
+.error_message{
+    color : red;
+    font-size: 20px;
+}
 /* 여기부터 top */
 .top{
     border: 1px solid black;

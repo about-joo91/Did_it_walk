@@ -10,14 +10,24 @@
 
 </head>
 <body>
+
     <div class="wrap">
         <div class="upload_modal_background">
             <div class="upload_modal">
+                <div class="upload_file_image"></div>
                 <form id="upload_file_form" class="upload_file_form" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <input type="file" name="input_file" id="input_file">
+                    <textarea name="input_content" id="input_content" class="input_content" cols="40" rows="20"></textarea>
                 </form>
-                <div class="upload_file_image"></div>
+                {% if messages %}
+                {% for message in messages %}
+                <div class="error_message">
+                    {{ message.tags }}
+                    {{ message.message }}
+                </div>
+                {% endfor %}
+                {% endif %}
                 <button form="upload_file_form" type="submit">Upload</button>
             </div>
         </div>
