@@ -26,20 +26,25 @@ def main(request):
         user_data = request.user
         input_image = request.FILES.get('input_file', '')
         input_content = request.POST.get('input_content')
-        if input_image and input_content :
-            Post_info = Post(contents = input_content, users = user_data)
-            Post_info.save()
-            Post_Img_info = Post_Img(posts = Post_info, post_img = input_image)
-            Post_Img_info.save()
+        input_tag_title = request.POST.get('input_tag_title')
+        if input_image and input_content and input_tag_title:
             
+            post_info = Post(contents = input_content, users = user_data)
+            post_info.save()
+
+            shoe_tag_by_title = Shoe_tag.objects.get(tag_title=input_tag_title)
+            post_info.shoe_tags.add(shoe_tag_by_title)
+            post_info.save()
+
+            Post_Img_info = Post_Img(post = post_info, post_img = input_image)
+            Post_Img_info.save()
+
             return redirect('/post/home')
         else : 
             messages.info(request, 'image나 content가 비어있습니다.')
             return render(request, 'post/main.html',)
 
     
-    
-
 def show_image(request, obj_id):
     post_imgs = Post_Img.objects.get(id=obj_id)
     image_path = post_imgs.post_img.path
