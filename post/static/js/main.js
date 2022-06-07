@@ -59,11 +59,6 @@ tag_title_input.addEventListener('input', function(){
     var include_text = document.getElementById('input_tag_title').value;
     
     for (let i = 0; i < tag_title_class.length; i++){
-        if (tag_title_class[i].innerText.includes(include_text) == false){
-            tag_title_class[i].style.display ='none';
-        }
-        else if (tag_title_class[i].innerText.includes(include_text) == true){
-            tag_title_class[i].style.display ='block';
-        }
+        tag_title_class[i].style.display = (tag_title_class[i].innerText.includes(include_text)) ? 'block' : 'none';
     }
 })
