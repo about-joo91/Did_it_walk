@@ -14,11 +14,22 @@
     <div class="wrap">
         <div class="upload_modal_background">
             <div class="upload_modal">
-                <div class="upload_file_image"></div>
+                <div class="upload_file_image"></div><!-- 미리 보기 이미지 영역 -->
                 <form id="upload_file_form" class="upload_file_form" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <input type="file" name="input_file" id="input_file">
-                    <textarea name="input_content" id="input_content" class="input_content" cols="40" rows="20"></textarea>
+                    <textarea name="input_content" id="input_content" class="input_content" cols="30" rows="10" placeholder="여기에 content를 작성 해 주세요!!"></textarea>
+                    <div class="input_tag_title_area">
+                        <input type="text" name="input_tag_title" class="input_tag_title" id="input_tag_title" placeholder="태그하실 신발의 이름을 골라주세요!!">
+                        {% for shoe_tag in shoe_tags %}
+                        <div class="input_tag_title_list">
+                            <div class="input_tag_title_list_obj" id="input_tag_title_list_obj_{{shoe_tag.tag_title}}" onclick="take_tag_title('{{shoe_tag.tag_title}}')">
+                                {{shoe_tag.tag_title}}
+                            <hr>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
                 </form>
                 {% if messages %}
                 {% for message in messages %}
