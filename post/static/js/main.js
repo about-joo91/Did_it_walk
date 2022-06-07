@@ -9,8 +9,8 @@ if (e.target.classList.contains('upload_modal_background')) {
 function open_modal(){
     document.querySelector('.upload_modal_background').style.display="block"
     document.body.style.overflow = 'hidden';
-    let modal_top_now = parseInt((window.innerHeight - 380) / 2)
-    let modal_left_now = parseInt((window.innerWidth - 380) / 2)
+    let modal_top_now = parseInt((window.innerHeight - 700) / 2)
+    let modal_left_now = parseInt((window.innerWidth - 1000) / 2)
     let upload_modal_body = document.querySelector('.upload_modal');
     upload_modal_body.style.left = modal_left_now + "px";
     upload_modal_body.style.top = modal_top_now + "px";
@@ -45,4 +45,20 @@ upload_modal.addEventListener('drop', function(e){
     }
     reader.readAsDataURL(tmp_data.files[0])
     reader.close()
+})
+
+const tag_title_input = document.getElementById("input_tag_title");
+
+function take_tag_title(tag_title){
+    const tag_title_id = document.getElementById("input_tag_title_list_obj_" + tag_title);
+    tag_title_input.value = tag_title_id.innerText;
+}
+
+tag_title_input.addEventListener('input', function(){
+    const tag_title_class = document.querySelectorAll('.input_tag_title_list > .input_tag_title_list_obj');
+    var include_text = document.getElementById('input_tag_title').value;
+    
+    for (let i = 0; i < tag_title_class.length; i++){
+        tag_title_class[i].style.display = (tag_title_class[i].innerText.includes(include_text)) ? 'block' : 'none';
+    }
 })

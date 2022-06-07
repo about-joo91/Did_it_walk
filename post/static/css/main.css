@@ -16,8 +16,8 @@ html{
     display: none;
 }
 .upload_modal{
-    width: 30rem;
-    height: 20rem;
+    width: 100rem;
+    height: 70rem;
     background-color: white;
     border: 1px solid black;
     display: flex;
@@ -38,11 +38,28 @@ html{
     visibility: visible;
     z-index: 5;
     width: 400px;
-    height: 600px;
+    height: 300px;
     background-color: green;
 }
 .input_content{
     visibility: visible;
+}
+.input_tag_title{
+    width: 240px;
+}
+.input_tag_title_area{
+    visibility: visible;
+    width: 250px;
+    height: 300px;
+    background-color: antiquewhite;
+}
+.input_tag_title_list{
+    width: 250px;
+}
+.input_tag_title_list_obj:hover{
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline blue;
 }
 .error_message{
     color : red;
