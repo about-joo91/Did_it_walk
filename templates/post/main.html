@@ -21,10 +21,10 @@
                     <textarea name="input_content" id="input_content" class="input_content" cols="30" rows="10" placeholder="여기에 content를 작성 해 주세요!!"></textarea>
                     <div class="input_tag_title_area">
                         <input type="text" name="input_tag_title" class="input_tag_title" id="input_tag_title" placeholder="태그하실 신발의 이름을 골라주세요!!">
-                        {% for shoe_tag in shoe_tags %}
+                        {% for all_shoe in all_shoe_list %}
                         <div class="input_tag_title_list">
-                            <div class="input_tag_title_list_obj" id="input_tag_title_list_obj_{{shoe_tag.tag_title}}" onclick="take_tag_title('{{shoe_tag.tag_title}}')">
-                                {{shoe_tag.tag_title}}
+                            <div class="input_tag_title_list_obj" id="input_tag_title_list_obj_{{all_shoe.tag_title}}" onclick="take_tag_title('{{all_shoe.tag_title}}')">
+                                {{all_shoe.tag_title}}
                             <hr>
                             </div>
                         </div>
@@ -70,21 +70,23 @@
         </div>
         <div class="button" onclick="open_modal()">+</div>
         <div class="bottom">
-            {% for post_img in post_imgs %}
+            {% for post_image, shoe_tag, post, post_user_ids_data in post_shoe_list %}
             <div class="bt_pb_post">
-                <div class="bt_pb_pt_img"><img src="{{ post_img.post_img_url.url }}" alt="" width="300"></div>
+                <div class="bt_pb_pt_img"><img src="/post/post_images/{{ post_image }}" alt="" width="300"></div>
                 <div class="bt_pb_pt_content">
                     <div class="bt_pb_pt_ct_user">
                         <div class="bt_pb_pt_ct_us_profile_img"><img src="https://images.unsplash.com/photo-1512374382149-233c42b6a83b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHNob2VzfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60" width="37" height="37" alt=""></div>
-                        <div class="bt_pb_pt_ct_us_profile_name">about_zoo</div>
+                        <div class="bt_pb_pt_ct_us_profile_name">{{post_user_ids_data.username}}</div>
                     </div>
-                    <div class="bt_pb_pt_ct_comment">~~~어때서 좋다.</div>
+                    <div class="bt_pb_pt_ct_comment">{{post.contents}}</div>
                     <div class="bt_pb_pt_ct_likes_comments">좋아요x개 댓글x개</div>
                     <div class="bt_pb_pt_ct_shoe_tag">
-                        <div class="bt_pb_pt_ct_st_img"></div>
+                        
+                        <div class="bt_pb_pt_ct_st_img" style="background-image :url({{ shoe_tag.tag_image_url }}) "></div>
+                        
                         <div class="bt_pb_pt_ct_st_tag_inpo">
-                            <div class="bt_pb_ct_st_ti_tag_name">염기호 x 주정한 에디션 1번 블라크</div>
-                            <div class="bt_pb_ct_st_ti_tag_price">가격 14,350,000원</div>
+                            <div class="bt_pb_ct_st_ti_tag_name">{{ shoe_tag.tag_title }}</div>
+                            <div class="bt_pb_ct_st_ti_tag_price">{{ shoe_tag.tag_price }}원</div>
                         </div>
                     </div>
                 </div>
