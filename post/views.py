@@ -1,7 +1,6 @@
 from email import message
 from certifi import contents
 from django.shortcuts import render, redirect
-from flask import jsonify, request_started
 from django.views.static import serve 
 import os
 from .models import Post_Img, Post, Shoe_tag
