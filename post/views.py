@@ -5,6 +5,7 @@ from flask import jsonify, request_started
 from django.views.static import serve 
 import os
 from .models import Post_Img, Post, Shoe_tag
+from user.models import UserModel
 from django.contrib import messages
 
 
@@ -18,9 +19,40 @@ def home(request):
 
 def main(request):
     if request.method == 'GET':
-        post_imgs = Post_Img.objects.all()
-        shoe_tag = Shoe_tag.objects.all()
-        return render(request, 'post/main.html',{'post_imgs' : post_imgs, 'shoe_tags' : shoe_tag})
+        user = request.user
+        posts = Post.objects.filter(user = user)
+        post_images = [Post_Img.objects.get(post = post).id for post in posts]
+        
+        shoe_tags = []
+        for post in posts:
+            shoe_tag = post.shoe_tags.all()
+            shoe_tags.append(*shoe_tag)
+        for shoe_tag in shoe_tags:
+            print("shoe_tag : ", shoe_tag.tag_title)
+        
+        all_shoe_list = []
+        all_shoes = Shoe_tag.objects.all()
+        for a in all_shoes:
+            all_shoe_list.append(a)
+
+        
+            
+
+        post_user_ids_list = [UserModel.objects.filter(id=post.user_id) for post in posts]
+        post_user_ids_datas = []
+        for post_user_ids in post_user_ids_list:
+            for post_user_id in post_user_ids:
+                post_user_ids_datas.append(post_user_id)
+
+        post_shoe_list = zip(post_images, shoe_tags, posts, post_user_ids_datas)
+        
+        context={
+            'post_shoe_list' : post_shoe_list,
+            'all_shoe_list' : all_shoe_list
+            }
+
+        return render(request, 'post/main.html', context)
+
 
     elif request.method == 'POST':
         user_data = request.user
@@ -29,7 +61,7 @@ def main(request):
         input_tag_title = request.POST.get('input_tag_title')
         if input_image and input_content and input_tag_title:
             
-            post_info = Post(contents = input_content, users = user_data)
+            post_info = Post(contents = input_content, user = user_data)
             post_info.save()
 
             shoe_tag_by_title = Shoe_tag.objects.get(tag_title=input_tag_title)
