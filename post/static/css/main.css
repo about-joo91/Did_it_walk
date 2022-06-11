@@ -1,3 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Hi+Melody&family=Indie+Flower&display=swap');
+
+*:lang(ko-KR) {
+    font-family: 'Hi Melody';
+}
+
+*:lang(en) {
+    font-family: 'Indie Flower';
+}
+
+* {
+    background-color: #F1F1EB;
+}
+
 html{
     font-size: 62.5%;
     width: 172.8rem;
@@ -92,15 +106,18 @@ html{
     height: 96.6rem;
     border: 1px solid black;
     margin: 4.15rem 5.7rem 0 5.7rem;
-
+    color: #53AA45;
 }
 .t_mt_title{
     width: 18.8rem;
     height: 5.56rem;
-    font-size: 50px;
+    font-size: 15rem;
     display: flex;
-    justify-content: center;
     align-items: center;
+    color: #53AA45;
+    margin-left: -1rem;
+    letter-spacing: -0.47em;
+
 }
 .t_mt_logo{
     font-size: 60px;
@@ -110,6 +127,7 @@ html{
     margin-top: 23.2rem;
     border: 1px solid black;
     writing-mode: vertical-lr;
+    letter-spacing: 1.7rem;
 }
 /* 탑 오른쪽의 추천 태그부분 */
 .t_right_tag{
@@ -166,12 +184,16 @@ html{
     flex-direction: row;
     justify-content: space-between;
 }
-.m_sb_recency{
+.m_sb_recente{
     width: 13.3rem;
     font-size: 32px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.a_href{
+    text-decoration-line: none;
+    color: black;
 }
 .m_sb_suggest{
     width: 13.3rem;
@@ -242,7 +264,7 @@ html{
     align-items: center;
 }
 .bt_pb_pt_ct_comment{
-    width: 30rem;
+    width: 28rem;
     margin-top: 1rem;
 }
 .bt_pb_pt_ct_likes_comments{
@@ -253,7 +275,14 @@ html{
     width: 30rem;
     margin-top: 0.5rem;
     display: flex;
+    border: 1px solid black;
 }
+.bt_pb_pt_ct_st_tag_inpo{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
 .bt_pb_pt_ct_st_img{
     width: 8rem;
     height: 8rem;

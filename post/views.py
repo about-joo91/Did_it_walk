@@ -1,13 +1,7 @@
-from email import message
 from multiprocessing.connection import answer_challenge
-import re
-from certifi import contents
 from django.shortcuts import render, redirect
 from django.views.static import serve 
 import os
-
-from pyparsing import removeQuotes
-
 from user.views import follow
 from .models import PostImg, Post, ShoeTag
 from user.models import UserModel
@@ -80,7 +74,7 @@ def main_data(request):
 
         return following_posts, shoe_tags
 
-#------------------새로운 new_main--------------
+
 def main(request, page_name):
     if request.method == 'GET':
         send_data = {"request" : request, "page_name" : page_name}
@@ -95,7 +89,7 @@ def main(request, page_name):
         
     elif request.method == "POST":
         save_post(request)
-        return render(request, 'post/main_post.html')
+        return redirect("/post/home/recent")
 
 
 def show_image(request, obj_id):
