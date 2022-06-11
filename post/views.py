@@ -86,9 +86,10 @@ def main(request, page_name):
         send_data = {"request" : request, "page_name" : page_name}
         posts, shoe_tags = main_data(send_data)
         total_datas = zip(posts, shoe_tags)
-
+        all_shoe_list = ShoeTag.objects.all()
         context={
-                'total_datas' : total_datas
+                'total_datas' : total_datas,
+                "all_shoe_list" : all_shoe_list
                 }
         return render(request, 'post/main_post.html', context)
         

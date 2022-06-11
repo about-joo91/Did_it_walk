@@ -22,12 +22,14 @@
                     <div class="input_tag_title_area">
                         <input type="text" name="input_tag_title" class="input_tag_title" id="input_tag_title" placeholder="태그하실 신발의 이름을 골라주세요!!">
                         {% for all_shoe in all_shoe_list %}
+                        {% if forloop.counter < 30 %}
                         <div class="input_tag_title_list">
                             <div class="input_tag_title_list_obj" id="input_tag_title_list_obj_{{all_shoe.tag_title}}" onclick="take_tag_title('{{all_shoe.tag_title}}')">
                                 {{all_shoe.tag_title}}
                             <hr>
                             </div>
                         </div>
+                        {% endif %}
                         {% endfor %}
                     </div>
                 </form>
