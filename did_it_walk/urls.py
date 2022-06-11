@@ -23,5 +23,6 @@ urlpatterns = [
     path('', views.home, name="home"),
     path('user/', include('user.urls')),
     path('post/', include('post.urls')),
-    path('likes_test/', include('likes_test.urls'))
+    path('likes_test/', include('likes_test.urls')),
+    path('db_test/', include('db_test.urls')),
 ]
