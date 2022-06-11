@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <form action={% url 'get_specific' %} method="post" name="shoe_choose_form">
+            {% csrf_token %}
+            <input type="text" name='tag_id', id='tag_id'>
+            <button type="submit">선택</button>
+        </form>
+        <div>
+            당신의 신발
+            {% if cur_shoe_tag %}
+            <div>
+                {{ cur_shoe_tag.tag_title }}
+            </div>
+            <img src="{{ cur_shoe_tag.tag_image_url }}">
+            {% endif %}
+
+        </div>
+        {% for tag in shoe_tags %}
+        <div>
+            {{ tag.tag_title }}
+        </div>
+        <img src="{{ tag.tag_image_url }}">
+        {% endfor %}
+    </div>
+</body>
+
+</html>
