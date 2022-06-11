@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href={% static 'css/likes_test.css' %}>
+    <title>Document</title>
+</head>
+
+<body>
+    {% for post , like in post_infos %}
+    <div class="main_card">
+        <div class="title">
+        </div>
+        <img class="image_tag" src="{% url 'post_images' post.post_img.id %}" width="400px">
+    </div>
+    <div class="content">
+        {{post.contents}}
+    </div>
+    <div class="icon_box">
+        {% if like %}
+        <i class="bi bi-heart-fill heart_btn" onclick="like('{{ post.id}}')"></i>
+        {% else %}
+        <i class="bi bi-heart heart_btn" onclick="like('{{ post.id }}')"></i>
+        {% endif %}
+    </div>
+    <a href={{post.get_absolute_url}}>더보기</a>
+    <img width="50px" src={{ shoe_tag.tag_image_url }}>
+    
+    </div>
+    {% endfor %}
+</body>
+<script src={% static 'js/likes_test.js' %}></script>
+
+</html>
