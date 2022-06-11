@@ -12,25 +12,25 @@
 </head>
 
 <body>
-    {% for post_item , shoe_tag, like in post_infos %}
+    {% for post , like in post_infos %}
     <div class="main_card">
         <div class="title">
-
         </div>
-        <img src="/post/post_images/{{ post_item }}" alt="" width="400px">
+        <img class="image_tag" src="{% url 'post_images' post.post_img.id %}" width="400px">
+    </div>
+    <div class="content">
+        {{post.contents}}
     </div>
     <div class="icon_box">
         {% if like %}
-        <i class="bi bi-heart-fill heart_btn" onclick="like('{{ post_item }}')"></i>
+        <i class="bi bi-heart-fill heart_btn" onclick="like('{{ post.id}}')"></i>
         {% else %}
-        <i class="bi bi-heart heart_btn" onclick="like('{{ post_item }}')"></i>
+        <i class="bi bi-heart heart_btn" onclick="like('{{ post.id }}')"></i>
         {% endif %}
     </div>
+    <a href={{post.get_absolute_url}}>더보기</a>
     <img width="50px" src={{ shoe_tag.tag_image_url }}>
-    <div class="comment">
-
-    </div>
-
+    
     </div>
     {% endfor %}
 </body>

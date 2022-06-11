@@ -1,5 +1,8 @@
-function getCookie(name) {
-    let cookieValue = null;
+var base_url = window.location.origin;
+console.log(base_url)
+
+function get_cookie(name) {
+    let cookie_value = null;
 
     if (document.cookie && document.cookie !== '') {
         const cookies = document.cookie.split(';');
@@ -8,18 +11,17 @@ function getCookie(name) {
 
             // Does this cookie string begin with the name we want?
             if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-
+                cookie_value = decodeURIComponent(cookie.substring(name.length + 1));
                 break;
             }
         }
     }
 
-    return cookieValue;
+    return cookie_value;
 }
 
 
-const csrftoken = getCookie('csrftoken')
+const csrftoken = get_cookie('csrftoken')
 const like_button = document.querySelector('.heart_btn')
 async function like(post_id) {
     const result = await fetch('http://127.0.0.1:8000/likes_test/' + post_id + '/', {
