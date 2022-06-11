@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'post',
     'likes_test',
     'db_test',
+    'detail_page',
 ]
 
 MIDDLEWARE = [
