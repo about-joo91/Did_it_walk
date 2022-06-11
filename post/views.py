@@ -1,10 +1,15 @@
 from email import message
+from multiprocessing.connection import answer_challenge
+import re
 from certifi import contents
 from django.shortcuts import render, redirect
-from flask import jsonify, request_started
 from django.views.static import serve 
 import os
-from .models import Post_Img, Post, Shoe_tag
+
+from pyparsing import removeQuotes
+
+from user.views import follow
+from .models import PostImg, Post, ShoeTag
 from user.models import UserModel
 from django.contrib import messages
 
@@ -13,71 +18,87 @@ from django.contrib import messages
 def home(request):
     user = request.user.is_authenticated
     if user:
-        return redirect('/post/home')
+        return redirect('/post/home/recent')
     else:
         return redirect('/user/sign_in')
 
-def main(request):
-    if request.method == 'GET':
-        user = request.user
-        posts = Post.objects.filter(user = user)
-        post_images = [Post_Img.objects.get(post = post).id for post in posts]
-        
+def save_post(request):
+    user_data = request.user
+    input_image = request.FILES.get('input_file', '')
+    input_content = request.POST.get('input_content')
+    input_tag_title = request.POST.get('input_tag_title')
+    if input_image and input_content and input_tag_title:
+            
+        Post_Img_info = PostImg(post_img = input_image)
+        Post_Img_info.save()
+
+        post_info = Post(contents = input_content, user = user_data, post_img = Post_Img_info)
+        post_info.save()
+
+        shoe_tag_by_title = ShoeTag.objects.get(tag_title=input_tag_title)
+        post_info.shoe_tags.add(shoe_tag_by_title)
+        post_info.save()
+
+        return redirect('/post/home')
+    else : 
+        messages.info(request, 'image나 content가 비어있습니다.')
+        return render(request, 'post/main_recent.html')
+
+
+def following(request):
+    my_user = request.user
+    my_follows= UserModel.objects.filter(followee = my_user)
+    my_follows_posts_list = []
+    for my_follow in my_follows:
+        my_follows_posts = Post.objects.get(user_id = my_follow.id)
+        my_follows_posts_list.append(my_follows_posts)
+
+    return my_follows_posts_list
+
+
+def main_data(request):
+    user = request.get("request").user
+    
+    if request.get("page_name") == "recent":
+        recent_posts = Post.objects.all()
+        recent_data = recent_posts
+
         shoe_tags = []
-        for post in posts:
+        for post in recent_posts:
             shoe_tag = post.shoe_tags.all()
             shoe_tags.append(*shoe_tag)
-        for shoe_tag in shoe_tags:
-            print("shoe_tag : ", shoe_tag.tag_title)
-        
-        all_shoe_list = []
-        all_shoes = Shoe_tag.objects.all()
-        for a in all_shoes:
-            all_shoe_list.append(a)
 
-        
-            
+        return recent_data, shoe_tags
 
-        post_user_ids_list = [UserModel.objects.filter(id=post.user_id) for post in posts]
-        post_user_ids_datas = []
-        for post_user_ids in post_user_ids_list:
-            for post_user_id in post_user_ids:
-                post_user_ids_datas.append(post_user_id)
+    elif request.get("page_name") == "following":
+        following_posts = following(request.get("request"))
 
-        post_shoe_list = zip(post_images, shoe_tags, posts, post_user_ids_datas)
-        
+        shoe_tags = []
+        for post in following_posts:
+            shoe_tag = post.shoe_tags.all()
+            shoe_tags.append(*shoe_tag)
+
+        return following_posts, shoe_tags
+
+#------------------새로운 new_main--------------
+def main(request, page_name):
+    if request.method == 'GET':
+        send_data = {"request" : request, "page_name" : page_name}
+        posts, shoe_tags = main_data(send_data)
+        total_datas = zip(posts, shoe_tags)
+
         context={
-            'post_shoe_list' : post_shoe_list,
-            'all_shoe_list' : all_shoe_list
-            }
+                'total_datas' : total_datas
+                }
+        return render(request, 'post/main_post.html', context)
+        
+    elif request.method == "POST":
+        save_post(request)
+        return render(request, 'post/main_post.html')
 
-        return render(request, 'post/main.html', context)
 
-
-    elif request.method == 'POST':
-        user_data = request.user
-        input_image = request.FILES.get('input_file', '')
-        input_content = request.POST.get('input_content')
-        input_tag_title = request.POST.get('input_tag_title')
-        if input_image and input_content and input_tag_title:
-            
-            post_info = Post(contents = input_content, user = user_data)
-            post_info.save()
-
-            shoe_tag_by_title = Shoe_tag.objects.get(tag_title=input_tag_title)
-            post_info.shoe_tags.add(shoe_tag_by_title)
-            post_info.save()
-
-            Post_Img_info = Post_Img(post = post_info, post_img = input_image)
-            Post_Img_info.save()
-
-            return redirect('/post/home')
-        else : 
-            messages.info(request, 'image나 content가 비어있습니다.')
-            return render(request, 'post/main.html',)
-
-    
 def show_image(request, obj_id):
-    post_imgs = Post_Img.objects.get(id=obj_id)
+    post_imgs = PostImg.objects.get(id=obj_id)
     image_path = post_imgs.post_img.path
     return serve(request, os.path.basename(image_path), os.path.dirname(image_path))
+

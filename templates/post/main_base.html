@@ -61,39 +61,16 @@
                 </div>
             </div>
         </div>
+        <div class="button" onclick="open_modal()">+</div>
         <div class="middle">
             <div class="m_subheader">
-                <div class="m_sb_recency">최신</div>
-                <div class="m_sb_suggest">추천</div>
-                <div class="m_sb_following">팔로잉</div>
+                <div class="m_sb_recency"><a href="/post/home/recent">최신</a></div>
+                <div class="m_sb_suggest"><a href="post/home/suggest">추천</a></div>
+                <div class="m_sb_following"><a href="/post/home/following">팔로잉</a></div>
             </div>
         </div>
-        <div class="button" onclick="open_modal()">+</div>
-        <div class="bottom">
-            {% for post_image, shoe_tag, post, post_user_ids_data in post_shoe_list %}
-            <div class="bt_pb_post">
-                <div class="bt_pb_pt_img"><img src="/post/post_images/{{ post_image }}" alt="" width="300"></div>
-                <div class="bt_pb_pt_content">
-                    <div class="bt_pb_pt_ct_user">
-                        <div class="bt_pb_pt_ct_us_profile_img"><img src="https://images.unsplash.com/photo-1512374382149-233c42b6a83b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHNob2VzfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60" width="37" height="37" alt=""></div>
-                        <div class="bt_pb_pt_ct_us_profile_name">{{post_user_ids_data.username}}</div>
-                    </div>
-                    <div class="bt_pb_pt_ct_comment">{{post.contents}}</div>
-                    <div class="bt_pb_pt_ct_likes_comments">좋아요x개 댓글x개</div>
-                    <div class="bt_pb_pt_ct_shoe_tag">
-                        
-                        <div class="bt_pb_pt_ct_st_img" style="background-image :url({{ shoe_tag.tag_image_url }}) "></div>
-                        
-                        <div class="bt_pb_pt_ct_st_tag_inpo">
-                            <div class="bt_pb_ct_st_ti_tag_name">{{ shoe_tag.tag_title }}</div>
-                            <div class="bt_pb_ct_st_ti_tag_price">{{ shoe_tag.tag_price }}원</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-            
-        </div>
+        {% block content %}{% endblock  %}
+
     </div>
     
 </body>
