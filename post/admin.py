@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Post_Img, Post, Shoe_tag
+from .models import PostImg, Post, ShoeTag
 # Register your models here.
-admin.site.register(Post_Img)
+admin.site.register(PostImg)
 admin.site.register(Post)
-admin.site.register(Shoe_tag)
+admin.site.register(ShoeTag)
