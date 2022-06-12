@@ -1,6 +1,6 @@
-from unicodedata import name
 from django.urls import path
 from . import views
+from detail_page.urls import urlpatterns
 
 urlpatterns = [
     path('', views.home, name='home'),
