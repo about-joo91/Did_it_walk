@@ -67,3 +67,30 @@ comment_form.addEventListener('submit', function (e) {
         e.preventDefault();
     }
 })
+
+async function comment_delete(post_id, comment_id) {
+    const result = await fetch(base_url + '/post/comment/' + post_id + '/' + comment_id, {
+        method: 'POST',
+        headers: {
+            'Aceept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+        }
+    })
+    if (result.ok) {
+        location.reload()
+    }
+}
+
+function edit_ready(comment_id, content) {
+    const dc_cb_content_box = document.getElementById('dc_cb_content_box_' + comment_id)
+    dc_cb_content_box.innerHTML = `
+    <form method="post" action="${base_url}/post/comment/edit/${comment_id}" type="submit" name="comment_edit_form${comment_id}" id="comment_edit_form${comment_id}">
+    <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
+    <textarea name="edit_box" class="edit_box" id = "new_content_${comment_id}" placeholder="${content}"></textarea>
+    </form>`
+    const dc_cb_button_box = document.getElementById('dc_cb_button_box_' + comment_id)
+    dc_cb_button_box.innerHTML = `<button class="edit_submit_btn" type="submit" form="comment_edit_form${comment_id}">확인</button>`
+}
+
+
