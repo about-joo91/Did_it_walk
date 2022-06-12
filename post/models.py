@@ -1,7 +1,6 @@
-from distutils.command.upload import upload
-from pyexpat import model
 from django.db import models
 from user.models import UserModel
+from django.urls import reverse
 
 # Create your models here.
 class ShoeTag(models.Model):
@@ -15,14 +14,24 @@ class ShoeTag(models.Model):
 class Post(models.Model):
     class Meta:
         db_table = "Post"
+    user = models.ForeignKey(UserModel, on_delete=models.SET_NULL, null=True)
+    post_img = models.ForeignKey('PostImg', on_delete=models.SET_NULL, null=True)
     contents = models.TextField()
-    user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     shoe_tags = models.ManyToManyField(ShoeTag, related_name='shoe_taggie')
-    post_img = models.ForeignKey('PostImg', on_delete=models.CASCADE)
+    
+    def get_absolute_url(self):
+        return reverse("detail_page", kwargs={"pk": self.pk})
+     
 
 class PostImg(models.Model):
     class Meta:
         db_table = "Post_Img"
-    # post = models.ForeignKey('Post', on_delete=models.CASCADE)
     post_img = models.ImageField(upload_to="media/")
 
+class Likes(models.Model):
+    class Meta:
+        db_table = 'likes'
+    user = models.ForeignKey(UserModel, on_delete=models.SET_NULL, null=True)
+    post = models.ForeignKey('Post', on_delete=models.SET_NULL, null=True)

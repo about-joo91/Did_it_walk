@@ -4,13 +4,14 @@
 <div class="bottom">
     {% for post, shoe_tag in total_datas %}
     <div class="bt_pb_post">
-        <div class="bt_pb_pt_img"><img src="{% url 'post_images' post.post_img.id%}" alt="" width="300"></div>
+        <div class="bt_pb_pt_img"><img src="{% url 'post_images' post.post_img.id %}" alt="" width="300"></div>
         <div class="bt_pb_pt_content">
             <div class="bt_pb_pt_ct_user">
                 <div class="bt_pb_pt_ct_us_profile_img"><img src="https://images.unsplash.com/photo-1512374382149-233c42b6a83b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHNob2VzfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60" width="37" height="37" alt=""></div>
                 <div class="bt_pb_pt_ct_us_profile_name">{{post.user.username}}</div>
             </div>
             <div class="bt_pb_pt_ct_comment">{{post.contents}}</div>
+            <i class="bi bi-heart heart_btn" onclick="like('{{ post.id }}')"></i>
             <div class="bt_pb_pt_ct_likes_comments">좋아요x개 댓글x개</div>
             <div class="bt_pb_pt_ct_shoe_tag">
                 

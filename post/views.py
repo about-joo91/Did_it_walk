@@ -1,9 +1,8 @@
-from multiprocessing.connection import answer_challenge
 from django.shortcuts import render, redirect
 from django.views.static import serve 
 import os
 from user.views import follow
-from .models import PostImg, Post, ShoeTag
+from .models import PostImg, Post, ShoeTag, Likes
 from user.models import UserModel
 from django.contrib import messages
 
@@ -59,8 +58,7 @@ def main_data(request):
 
         shoe_tags = []
         for post in recent_posts:
-            shoe_tag = post.shoe_tags.all()
-            shoe_tags.append(*shoe_tag)
+            shoe_tags = post.shoe_tags.all()
 
         return recent_data, shoe_tags
 
@@ -69,8 +67,7 @@ def main_data(request):
 
         shoe_tags = []
         for post in following_posts:
-            shoe_tag = post.shoe_tags.all()
-            shoe_tags.append(*shoe_tag)
+            shoe_tags = post.shoe_tags.all()
 
         return following_posts, shoe_tags
 
@@ -97,3 +94,12 @@ def show_image(request, obj_id):
     image_path = post_imgs.post_img.path
     return serve(request, os.path.basename(image_path), os.path.dirname(image_path))
 
+def like(request, post_id):
+    if request.method == 'POST':
+        cur_user = request.user
+        new_like, created = Likes.objects.get_or_create(user= cur_user, post__id = post_id)
+        if not created:
+            new_like.delete()
+        else:
+            pass
+        return redirect('/')
