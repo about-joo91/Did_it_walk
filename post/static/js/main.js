@@ -1,13 +1,33 @@
+var base_url = window.location.origin;
+
+function get_cookie(name) {
+    let cookie_value = null;
+
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookie_value = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+
+    return cookie_value;
+}
 const modal_background = document.querySelector('.upload_modal_background');
 const upload_modal = document.querySelector('.upload_modal');
 
 modal_background.addEventListener('click', function (e) {
-if (e.target.classList.contains('upload_modal_background')) {
-    close_modal()
-}
+    if (e.target.classList.contains('upload_modal_background')) {
+        close_modal()
+    }
 })
-function open_modal(){
-    document.querySelector('.upload_modal_background').style.display="block"
+function open_modal() {
+    document.querySelector('.upload_modal_background').style.display = "block"
     document.body.style.overflow = 'hidden';
     let modal_top_now = parseInt((window.innerHeight - 700) / 2)
     let modal_left_now = parseInt((window.innerWidth - 1000) / 2)
@@ -16,19 +36,19 @@ function open_modal(){
     upload_modal_body.style.top = modal_top_now + "px";
 }
 
- function close_modal(){
-    document.querySelector('.upload_modal_background').style.display="none"
+function close_modal() {
+    document.querySelector('.upload_modal_background').style.display = "none"
     document.body.style.overflow = 'auto';
-    
+
 }
 
-upload_modal.addEventListener('dragover', function(e){
+upload_modal.addEventListener('dragover', function (e) {
     e.preventDefault();
 })
-upload_modal.addEventListener('dragleave', function(e){
+upload_modal.addEventListener('dragleave', function (e) {
     e.preventDefault();
 })
-upload_modal.addEventListener('drop', function(e){
+upload_modal.addEventListener('drop', function (e) {
     e.preventDefault();
     const data = e.dataTransfer;
     const input_file = document.querySelector('#input_file');
@@ -49,16 +69,33 @@ upload_modal.addEventListener('drop', function(e){
 
 const tag_title_input = document.getElementById("input_tag_title");
 
-function take_tag_title(tag_title){
+function take_tag_title(tag_title) {
     const tag_title_id = document.getElementById("input_tag_title_list_obj_" + tag_title);
     tag_title_input.value = tag_title_id.innerText;
 }
 
-tag_title_input.addEventListener('input', function(){
+tag_title_input.addEventListener('input', function () {
     const tag_title_class = document.querySelectorAll('.input_tag_title_list > .input_tag_title_list_obj');
     var include_text = document.getElementById('input_tag_title').value;
-    
-    for (let i = 0; i < tag_title_class.length; i++){
+
+    for (let i = 0; i < tag_title_class.length; i++) {
         tag_title_class[i].style.display = (tag_title_class[i].innerText.includes(include_text)) ? 'block' : 'none';
     }
 })
+
+const csrftoken = get_cookie('csrftoken')
+const like_button = document.querySelector('.heart_btn')
+async function like(post_id) {
+    const result = await fetch(base_url + '/post/like/' + post_id, {
+        method: 'POST',
+        mode: 'same-origin',
+        headers: {
+            'Aceept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+        }
+    })
+    if (result.ok) {
+        like_button.classList.contains("bi-heart-fill") ? like_button.classList.replace('bi-heart-fill', 'bi-heart') : like_button.classList.replace('bi-heart', 'bi-heart-fill')
+    }
+}
