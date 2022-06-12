@@ -91,3 +91,12 @@ input {
 .dc_comment_box {
     margin: 5px;
 }
+
+.error_msg {
+    position: relative;
+    top: 3rem;
+    color: rgb(210, 0, 0);
+    text-align: center;
+    font-family: 'Hi Melody';
+    font-size: 23px;
+}
