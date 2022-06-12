@@ -2,10 +2,9 @@ from django.shortcuts import render, redirect
 from django.views.static import serve 
 import os
 from user.views import follow
-from .models import PostImg, Post, ShoeTag, Likes
+from .models import PostImg, Post, Likes, ShoeTag
 from user.models import UserModel
 from django.contrib import messages
-
 
 # Create your views here.
 def home(request):
@@ -25,13 +24,14 @@ def save_post(request):
         Post_Img_info = PostImg(post_img = input_image)
         Post_Img_info.save()
 
-        post_info = Post(contents = input_content, user = user_data, post_img = Post_Img_info)
-        post_info.save()
-
-        shoe_tag_by_title = ShoeTag.objects.get(tag_title=input_tag_title)
+        shoe_tag_by_title = ShoeTag.objects.filter(tag_title=input_tag_title)[0]
+        post_info = Post.objects.create(
+            contents = input_content,
+            user = user_data,
+            post_img = Post_Img_info,
+            )
         post_info.shoe_tags.add(shoe_tag_by_title)
         post_info.save()
-
         return redirect('/post/home')
     else : 
         messages.info(request, 'image나 content가 비어있습니다.')

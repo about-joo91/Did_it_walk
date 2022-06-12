@@ -69,9 +69,11 @@ upload_modal.addEventListener('drop', function (e) {
 
 const tag_title_input = document.getElementById("input_tag_title");
 
-function take_tag_title(tag_title) {
+function take_tag_title(tag_title, tag_id) {
     const tag_title_id = document.getElementById("input_tag_title_list_obj_" + tag_title);
     tag_title_input.value = tag_title_id.innerText;
+    console.log(tag_title_input.value)
+
 }
 
 tag_title_input.addEventListener('input', function () {

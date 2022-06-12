@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'user',
     'post',
-    'db_test',
     'detail_page',
+    'shoes_tag',
 ]
 
 MIDDLEWARE = [
