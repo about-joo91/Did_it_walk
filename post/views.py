@@ -53,17 +53,23 @@ def following(request):
 
 def main_data(request):
     user = request.get("request").user
-    
     if request.get("page_name") == "recent":
         recent_posts = Post.objects.all()
         recent_data = recent_posts
 
         shoe_tags = []
+        is_like_list = []
+        all_like_list = []
+        comment_list = []
+        
         for post in recent_posts:
             shoe_tag = post.shoe_tags.all()
             shoe_tags.append(*shoe_tag)
-
-        return recent_data, shoe_tags
+            is_like_list.append(Likes.objects.filter(user = user, post = post).exists())
+            all_like_list.append(len(Likes.objects.filter(post_id = post.id)))
+            comment_list.append(len(Comments.objects.filter(post = post)))
+        
+        return recent_data, shoe_tags, is_like_list, all_like_list, comment_list
 
     elif request.get("page_name") == "following":
         following_posts = following(request.get("request"))
@@ -79,20 +85,20 @@ def main_data(request):
 def main(request, page_name):
     if request.method == 'GET':
         cur_user = request.user
+        cur_user_id = UserModel.objects.get(username = cur_user).id
         send_data = {"request" : request, "page_name" : page_name}
-        posts, shoe_tags = main_data(send_data)
+        posts, shoe_tags, is_like_list, all_like_list, comment_list = main_data(send_data)
         
         all_shoe_list = ShoeTag.objects.all()
-        is_like_list = []
-        for post in posts:
-            is_like = Likes.objects.filter(user = cur_user, post = post).exists()
-            is_like_list.append(is_like)
-            print("is_like : ", is_like)
-        total_datas = zip(posts, shoe_tags, is_like_list)
+        
+            
+        total_datas = zip(posts, shoe_tags, is_like_list, all_like_list, comment_list)
         context={
                 'total_datas' : total_datas,
-                "all_shoe_list" : all_shoe_list
+                "all_shoe_list" : all_shoe_list,
+                "cur_user_id" : cur_user_id
                 }
+
         return render(request, 'post/main_post.html', context)
         
     elif request.method == "POST":

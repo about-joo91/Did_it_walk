@@ -2,21 +2,58 @@
 
 {% block content %}
 <div class="bottom">
-    {% for post, shoe_tag, is_like in total_datas %}
+    {% for post, shoe_tag, is_like,all_like, comment in total_datas %}
+    
+    <div class="bt_post_modal_background" id="bt_post_modal_background_{{post.id}}">
+        <div class="bt_post_modal" id="bt_post_modal_{{post.id}}">
+            {% if post.user_id == cur_user_id %}
+            <div class= bt_pm_title>{{post.user.nickname}}님의 게시물</div>
+            <div class="bt_pm_body">
+                <div class="bt_pm_b_button_body">
+                    <div class="bt_pm_b_bd_edit" onclick="open_edit_post_content('{{post.id}}')">수정하기</div>
+                    <div class="bt_pm_b_bd_delete">삭제하기</div>
+                    <div class="bt_pm_b_bd_close" onclick="close_post_modal()">닫기</div>
+                </div>
+            </div>
+            {% else %}
+            <div class= bt_pm_title>{{post.user.nickname}}님의 게시물</div>
+            <div class="bt_pm_body">
+                <div class="bt_pm_b_button_body">
+                    <div class="bt_pm_b_bd_follow">팔로우</div>
+                    <div class="bt_pm_b_bd_close" onclick="close_post_modal()">닫기</div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <!-- 수정 모달입니다 -->
+    <div class="bt_pm_edit_post_modal_background" id="bt_pm_edit_post_modal_background_{{post.id}}"> 
+        <div class="bt_pm_edit_post_modal" id="bt_pm_edit_post_modal_{{post.id}}">
+            <div class= bt_pm_title>{{post.user.nickname}}님의 게시물</div>
+                <div class="bt_pm_body">
+                    <div class="bt_pm_b_button_body">
+                        <textarea name="bt_pm_b_button_body_text" id="bt_pm_b_button_body_text_{{post.id}}" cols="60" rows="7" style="resize: none;"></textarea>
+                    </div>
+                    <div class="bt_pm_b_button">
+                        <button>수정하기</button>
+                    </div>
+                </div>
+        </div>
+    </div>
     <div class="bt_pb_post">
-        <div class="bt_pb_pt_img"><img src="{% url 'post_images' post.post_img.id %}" alt="" width="300"></div>
+        <div class="bt_pb_pt_img"><a href="{% url 'detail_page' post.id %}" ><img src="{% url 'post_images' post.post_img.id %}" alt="" width="300"></a></div>
         <div class="bt_pb_pt_content">
             <div class="bt_pb_pt_ct_user">
-                <div class="bt_pb_pt_ct_us_profile_img"><img src="https://images.unsplash.com/photo-1512374382149-233c42b6a83b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHNob2VzfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60" width="37" height="37" alt=""></div>
+                <div class="bt_pb_pt_ct_us_profile_img" onclick="open_post_modal('{{post.id}}')"><img src="https://images.unsplash.com/photo-1512374382149-233c42b6a83b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHNob2VzfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60" width="37" height="37" alt=""></div>
                 <div class="bt_pb_pt_ct_us_profile_name">{{post.user.nickname}}</div>
             </div>
-            <div class="bt_pb_pt_ct_comment">{{post.contents}}</div>
+            <div class="bt_pb_pt_ct_comment" id="bt_pb_pt_ct_comment_{{post.id}}">{{post.contents}}</div>
             {% if is_like %}
             <i class="bi-heart-fill heart_btn_{{post.id}}" onclick="like('{{ post.id }}')"></i>
             {% else%}
             <i class="bi bi-heart heart_btn_{{post.id}}" onclick="like('{{ post.id }}')"></i>
             {% endif %}
-            <div class="bt_pb_pt_ct_likes_comments">좋아요<div class="like_count"></div>개 댓글x개</div>
+            <div class="bt_pb_pt_ct_likes_comments">좋아요<span class="like_count">{{all_like}}</span>개 댓글<span class = "comment_count">{{comment}}</span>개</div>
             <div class="bt_pb_pt_ct_shoe_tag">
                 
                 <div class="bt_pb_pt_ct_st_img" style="background-image :url({{shoe_tag.tag_image_url}})"></div>
