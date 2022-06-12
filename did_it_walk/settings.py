@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'post',
     'detail_page',
     'shoes_tag',
+    'mathfilters',
 ]
 
 MIDDLEWARE = [

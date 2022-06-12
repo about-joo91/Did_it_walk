@@ -87,3 +87,7 @@ input {
     border: none;
     font-size: 30px;
 }
+
+.dc_comment_box {
+    margin: 5px;
+}

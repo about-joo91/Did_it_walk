@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Hi+Melody&family=Indie+Flower&display=swap');
+
+* {
+    background-color: #F1F1EB;
+}
+
+.detail_img {
+    width: 600px;
+    margin: auto;
+    border-radius: 40px 40px 0 0;
+}
+
+.detail_card {
+    width: 600px;
+    margin: auto;
+
+}
+
+.dc_card_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px 5px 10px;
+    margin-top: 100px;
+    font-family: 'Indie Flower';
+}
+
+.bi-heart-fill {
+    color: red;
+}
+
+.dc_ch_b_heart {
+    text-align: center;
+}
+
+.dc_ch_profile {
+    display: flex;
+    align-items: center;
+    font-family: 'Indie Flower';
+    font-size: 16px;
+}
+
+.dc_ch_p_avatar {
+    border-radius: 100%;
+    width: 45px;
+    height: 45px;
+    margin-right: 10px;
+}
+
+.dc_ch_back {
+    display: flex;
+    align-items: center;
+}
+
+.dc_ch_b_heart {
+    font-size: 16px;
+    margin-left: 15px;
+}
+
+.dc_tb_my_tag {
+    display: flex;
+    align-items: center;
+}
+
+.dc_content {
+    margin: 0 5px;
+}
+
+.dc_tb_tag_img {
+    width: 50px;
+    height: 50px;
+    background-color: rgb(152, 149, 93);
+    border-radius: 10px;
+}
+
+
+.dc_tb_recommend_box {
+    width: 170px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.dc_tag_box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-family: 'Hi Melody';
+}
+
+.dc_tb_tag_title {
+    font-size: 14px;
+}
+
+.dc_icon_box {
+    margin: 10px 10px 0 0;
+    display: flex;
+    justify-content: end;
+}
+
+
+.dc_content_box {
+    margin-top: 10px;
+    font-family: 'Hi Melody';
+    font-size: 23px;
+    display: flex;
+    align-items: center;
+}
+
+.dc_db_content {
+    margin-left: 10px;
+}
+
+.comment_input {
+    width: 540px !important;
+    border: none !important;
+    outline: none !important;
+    background-color: rgb(230, 230, 230);
+    font-size: 16px;
+    font-family: 'Hi Melody';
+    padding: 10px 5px 0 5px;
+    border-radius: 5px;
+}
+
+.comment_btn {
+    font-family: 'Hi Melody';
+    position: relative;
+    width: 45px;
+    height: 50px;
+    top: -3.4rem;
+    left: 34.2rem;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    background-color: rgb(230, 230, 230);
+}
+
+.dc_comment_box {
+    position: relative;
+    top: -2rem;
+    display: flex;
+    font-family: 'Hi Melody';
+    align-items: center;
+    margin: 5px 10px 0 0;
+}
+
+
+.dc_cb_pb_comment_avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    margin-right: 10px;
+}
+
+.dc_cb_profile_box {
+    display: flex;
+    align-items: center;
+    font-family: 'Indie Flower';
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.more_btn {
+    text-align: center;
+    display: none;
+}
+
+.more_btn:hover {
+    cursor: pointer;
+}
+
+.bi:hover {
+    cursor: pointer;
+}
+
+.comment_btn:hover {
+    cursor: pointer;
+}
