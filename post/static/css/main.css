@@ -429,7 +429,9 @@ html {
     width: 30rem;
     border-radius: 40px;
 }
-
+.bt_pb_pt_img:hover{
+    width: 30.2rem;
+}
 /* width가 30인데 margin-left때문에 29 */
 .bt_pb_pt_content {
     width: 100%;

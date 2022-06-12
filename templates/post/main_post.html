@@ -3,10 +3,9 @@
 {% block content %}
 <div class="bottom">
     {% for post, shoe_tag, is_like,all_like, comment in total_datas %}
-    
     <div class="bt_post_modal_background" id="bt_post_modal_background_{{post.id}}">
         <div class="bt_post_modal" id="bt_post_modal_{{post.id}}">
-            {% if post.user_id == cur_user_id %}
+            {% if post.user.id == user.id %}
             <div class= bt_pm_title>{{post.user.nickname}}님의 게시물</div>
             <div class="bt_pm_body">
                 <div class="bt_pm_b_button_body">
@@ -41,7 +40,7 @@
         </div>
     </div>
     <div class="bt_pb_post">
-        <div class="bt_pb_pt_img"><a href="{% url 'detail_page' post.id %}" ><img src="{% url 'post_images' post.post_img.id %}" alt="" width="300"></a></div>
+        <div class="bt_pb_pt_img"><a href="{% url 'detail_page' post.id %}" ><img src="{% url 'post_images' post.post_img.id %}" alt="" width="100%"></a></div>
         <div class="bt_pb_pt_content">
             <div class="bt_pb_pt_ct_user">
                 <div class="bt_pb_pt_ct_us_profile_img" onclick="open_post_modal('{{post.id}}')"><img src="https://images.unsplash.com/photo-1512374382149-233c42b6a83b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHNob2VzfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60" width="37" height="37" alt=""></div>
