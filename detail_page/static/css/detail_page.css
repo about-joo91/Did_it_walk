@@ -28,6 +28,8 @@
 .dc_cd_profile {
     display: flex;
     align-items: center;
+    font-family: 'Indie Flower';
+    font-size: 16px;
 }
 
 .dc_ch_p_avatar {
@@ -42,6 +44,11 @@
     font-family: 'Hi Melody';
 }
 
+.dc_tb_my_tag {
+    display: flex;
+    align-items: center;
+}
+
 .dc_tb_tag_img {
     width: 50px;
     height: 50px;
@@ -53,6 +60,7 @@
 .dc_tag_box {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .dc_tb_tag_title {
@@ -60,14 +68,14 @@
 }
 
 .dc_icon_box {
-    margin-top: 10px;
+    margin: 10px 10px 0 0;
     display: flex;
     justify-content: end;
 }
 
 .bi {
-    font-size: 18px;
-    margin: 0 2.5px 0 2.5px;
+    font-size: 23px;
+    margin: 0 5px 0 2.5px;
 }
 
 .dc_content_box {
@@ -112,6 +120,7 @@
     display: flex;
     font-family: 'Hi Melody';
     align-items: center;
+    margin: 5px 10px 0 0;
 }
 
 
@@ -125,9 +134,7 @@
 .dc_cb_profile_box {
     display: flex;
     align-items: center;
+    font-family: 'Indie Flower';
+    font-size: 16px;
     margin-right: 10px;
-}
-
-.dc_cb_pb_comment_avatar {
-    display: flex;
 }

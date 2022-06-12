@@ -103,6 +103,7 @@ def like(request, post_id):
         else:
             pass
         return redirect('/')
+        
 def comment(request, post_id):
     content = request.POST.get('comment_input')
     cur_user = request.user
