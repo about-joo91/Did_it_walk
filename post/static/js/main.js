@@ -27,10 +27,10 @@ modal_background.addEventListener('click', function (e) {
     }
 })
 function open_modal() {
-    document.querySelector('.upload_modal_background').style.display = "block"
+    document.querySelector('.upload_modal_background').style.display = "flex"
     document.body.style.overflow = 'hidden';
-    let modal_top_now = parseInt((window.innerHeight - 700) / 2)
-    let modal_left_now = parseInt((window.innerWidth - 1000) / 2)
+    let modal_left_now = parseInt((window.innerWidth - 1100) / 2)
+    let modal_top_now = parseInt((window.innerHeight - 800) / 2)
     let upload_modal_body = document.querySelector('.upload_modal');
     upload_modal_body.style.left = modal_left_now + "px";
     upload_modal_body.style.top = modal_top_now + "px";
@@ -60,7 +60,7 @@ upload_modal.addEventListener('drop', function (e) {
     reader.onload = () => {
         upload_file_image.innerHTML +=
             `
-        <img class="um_preview_images" src="${reader.result}">
+        <img class="um_preview_images" src="${reader.result}" style.background-size = "cover">
         `
     }
     reader.readAsDataURL(tmp_data.files[0])
@@ -86,8 +86,10 @@ tag_title_input.addEventListener('input', function () {
 })
 
 const csrftoken = get_cookie('csrftoken')
-const like_button = document.querySelector('.heart_btn')
+
+const like_count = document.querySelector(".like_count")
 async function like(post_id) {
+    const like_button = document.querySelector('.heart_btn_' + post_id)
     const result = await fetch(base_url + '/post/like/' + post_id, {
         method: 'POST',
         mode: 'same-origin',
@@ -98,6 +100,12 @@ async function like(post_id) {
         }
     })
     if (result.ok) {
-        like_button.classList.contains("bi-heart-fill") ? like_button.classList.replace('bi-heart-fill', 'bi-heart') : like_button.classList.replace('bi-heart', 'bi-heart-fill')
-    }
+        if(like_button.classList.contains("bi-heart-fill")){
+            like_button.classList.replace('bi-heart-fill', 'bi-heart')
+            like_count.innerText - parseInt(like_count.innerText) - 1
+        } else {
+            like_button.classList.replace('bi-heart', 'bi-heart-fill')
+            like_count.innerText - parseInt(like_count.innerText) + 1
+        }
+    }   
 }
