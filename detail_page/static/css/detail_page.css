@@ -90,6 +90,7 @@
 
 .dc_tb_tag_title {
     font-size: 14px;
+    margin-left: 5px;
 }
 
 .dc_icon_box {
@@ -109,6 +110,7 @@
 
 .dc_db_content {
     margin-left: 10px;
+    font-size: 18px;
 }
 
 .comment_input {
@@ -142,8 +144,8 @@
     font-family: 'Hi Melody';
     align-items: center;
     margin: 5px 10px 0 0;
+    justify-content: space-between;
 }
-
 
 .dc_cb_pb_comment_avatar {
     width: 45px;
@@ -152,12 +154,34 @@
     margin-right: 10px;
 }
 
+.dc_cb_profile_box_wrapper {
+    display: flex;
+    align-items: center;
+}
+
 .dc_cb_profile_box {
     display: flex;
     align-items: center;
     font-family: 'Indie Flower';
     font-size: 16px;
     margin-right: 10px;
+}
+
+.dc_cb_button_box {
+    display: flex;
+}
+
+.edit_btn:hover {
+    cursor: pointer;
+}
+
+.delete_btn {
+    color: red;
+    margin-left: 10px;
+}
+
+.delete_btn:hover {
+    cursor: pointer;
 }
 
 .more_btn {
@@ -174,5 +198,22 @@
 }
 
 .comment_btn:hover {
+    cursor: pointer;
+}
+
+.edit_submit_btn {
+    outline: none;
+    border: none;
+}
+
+.edit_box {
+    position: relative;
+    top: 0.7rem;
+    width: 420px;
+    border: none;
+    outline: none;
+}
+
+.edit_submit_btn:hover {
     cursor: pointer;
 }

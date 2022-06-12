@@ -25,14 +25,14 @@ def sign_in(request):
         me = auth.authenticate(request, username = username, password= password)
         if me:
             auth.login(request, me)
-            return render(request,'success.html',{'msg' : '성공'})
-        return render(request, 'success.html', {'msg': '아이디/비밀번호를 확인하세요'})
+            return redirect('/')
+        return render(request, 'user/sign_in.html', {'error': '아이디/비밀번호를 확인하세요'})
     return render(request, 'user/sign_in.html')
 
 @login_required
 def sign_out(request):
     auth.logout(request)
-    return render(request, 'success.html',{'msg': '로그아웃 됨'})
+    return redirect('/')
 
 @login_required
 def follow_page(request):

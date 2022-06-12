@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render, redirect
 from django.views.static import serve 
 import os
@@ -121,10 +122,20 @@ def like(request, post_id):
             pass
         return redirect('/')
         
-def comment(request, post_id):
+def comment(request, post_id, comment_id = None):
     content = request.POST.get('comment_input')
-    cur_user = request.user
-    post = Post.objects.get(id = post_id)
-    new_comment = Comments.objects.create(post=post, user = cur_user, content= content)
-    new_comment.save()
+    if comment_id:
+        Comments.objects.get(id = comment_id).delete()
+    else:
+        cur_user = request.user
+        post = Post.objects.get(id = post_id)
+        new_comment = Comments.objects.create(post=post, user = cur_user, content = content)
+        new_comment.save()
     return redirect('/detail_page/'+ str(post_id))
+
+def comment_edit(request, comment_id):
+    new_content = request.POST.get('edit_box')
+    comment = Comments.objects.filter(id = comment_id)
+    comment.update(content = new_content)
+    post_id = comment[0].post.id
+    return redirect('/detail_page/'+str(post_id))

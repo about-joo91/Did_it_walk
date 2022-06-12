@@ -24,7 +24,7 @@
 
 
 .mb_left_line_text {
-    margin: 17rem 10rem 0 20rem;
+    margin: 17rem 10rem 0 34rem;
     writing-mode: vertical-lr;
     text-orientation: upright;
     font-size: 70px;
@@ -90,4 +90,13 @@ input {
 
 .dc_comment_box {
     margin: 5px;
+}
+
+.error_msg {
+    position: relative;
+    top: 3rem;
+    color: rgb(210, 0, 0);
+    text-align: center;
+    font-family: 'Hi Melody';
+    font-size: 23px;
 }

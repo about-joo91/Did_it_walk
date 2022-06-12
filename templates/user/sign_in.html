@@ -10,7 +10,13 @@
     <label class="sign_in_label" for="password">
         비밀번호
     </label>
-    <input class="user_input" lang="en" type="password"  id="password" name="password"/>   
+    <input class="user_input" lang="en" type="password"  id="password" name="password"/>
+    {% if error %}
+    <div class="error_msg">
+        {{error}}
+    </div>
+    {% endif %}   
     <button class="sign_in_btn" type="submit">로그인</button>
+    
 </form>
 {% endblock %}
