@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.static import serve 
 import os
 from user.views import follow
-from .models import PostImg, Post, Likes, ShoeTag
+from .models import PostImg, Post, Likes, ShoeTag, Comments
 from user.models import UserModel
 from django.contrib import messages
 
@@ -97,9 +97,18 @@ def show_image(request, obj_id):
 def like(request, post_id):
     if request.method == 'POST':
         cur_user = request.user
-        new_like, created = Likes.objects.get_or_create(user= cur_user, post__id = post_id)
-        if not created:
-            new_like.delete()
+        post = Post.objects.get(id= post_id)
+        like_obj, create = Likes.objects.get_or_create(user= cur_user, post = post)
+        if not create:
+            like_obj.delete()
         else:
             pass
         return redirect('/')
+        
+def comment(request, post_id):
+    content = request.POST.get('comment_input')
+    cur_user = request.user
+    post = Post.objects.get(id = post_id)
+    new_comment = Comments.objects.create(post=post, user = cur_user, content= content)
+    new_comment.save()
+    return redirect('/detail_page/'+ str(post_id))
