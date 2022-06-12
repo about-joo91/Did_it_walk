@@ -24,8 +24,8 @@ class PostImg(models.Model):
 class Likes(models.Model):
     class Meta:
         db_table = 'likes'
-    user = models.ForeignKey(UserModel, on_delete=models.SET_NULL, null=True)
-    post = models.ForeignKey('Post', on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    post = models.ForeignKey('Post', on_delete=models.CASCADE)
 
 class Comments(models.Model):
     class Meta:

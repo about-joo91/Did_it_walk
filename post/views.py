@@ -97,9 +97,10 @@ def show_image(request, obj_id):
 def like(request, post_id):
     if request.method == 'POST':
         cur_user = request.user
-        new_like, created = Likes.objects.get_or_create(user= cur_user, post__id = post_id)
-        if not created:
-            new_like.delete()
+        post = Post.objects.get(id= post_id)
+        like_obj, create = Likes.objects.get_or_create(user= cur_user, post = post)
+        if not create:
+            like_obj.delete()
         else:
             pass
         return redirect('/')
