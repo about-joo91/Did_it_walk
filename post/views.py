@@ -16,6 +16,7 @@ def home(request):
 
 def save_post(request):
     user_data = request.user
+    print("user_data : ", user_data)
     input_image = request.FILES.get('input_file', '')
     input_content = request.POST.get('input_content')
     input_tag_title = request.POST.get('input_tag_title')
@@ -58,7 +59,8 @@ def main_data(request):
 
         shoe_tags = []
         for post in recent_posts:
-            shoe_tags = post.shoe_tags.all()
+            shoe_tag = post.shoe_tags.all()
+            shoe_tags.append(*shoe_tag)
 
         return recent_data, shoe_tags
 
@@ -67,17 +69,25 @@ def main_data(request):
 
         shoe_tags = []
         for post in following_posts:
-            shoe_tags = post.shoe_tags.all()
+            shoe_tag = post.shoe_tags.all()
+            shoe_tags.append(*shoe_tag)
 
         return following_posts, shoe_tags
 
 
 def main(request, page_name):
     if request.method == 'GET':
+        cur_user = request.user
         send_data = {"request" : request, "page_name" : page_name}
         posts, shoe_tags = main_data(send_data)
-        total_datas = zip(posts, shoe_tags)
+        
         all_shoe_list = ShoeTag.objects.all()
+        is_like_list = []
+        for post in posts:
+            is_like = Likes.objects.filter(user = cur_user, post = post).exists()
+            is_like_list.append(is_like)
+            print("is_like : ", is_like)
+        total_datas = zip(posts, shoe_tags, is_like_list)
         context={
                 'total_datas' : total_datas,
                 "all_shoe_list" : all_shoe_list

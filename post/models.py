@@ -7,7 +7,7 @@ class Post(models.Model):
     class Meta:
         db_table = "Post"
     user = models.ForeignKey(UserModel, on_delete=models.SET_NULL, null=True)
-    post_img = models.ForeignKey('PostImg', on_delete=models.SET_NULL, null=True)
+    post_img = models.OneToOneField('PostImg', on_delete=models.SET_NULL, null=True)
     contents = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -35,6 +35,7 @@ class Comments(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
 
 class ShoeTag(models.Model):
     class Meta:
