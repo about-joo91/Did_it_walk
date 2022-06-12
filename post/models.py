@@ -12,7 +12,6 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     shoe_tags = models.ManyToManyField('ShoeTag', related_name='shoe_taggie')
-    
     def get_absolute_url(self):
         return reverse("detail_page", kwargs={"pk": self.pk})
      
@@ -28,7 +27,12 @@ class Likes(models.Model):
     user = models.ForeignKey(UserModel, on_delete=models.SET_NULL, null=True)
     post = models.ForeignKey('Post', on_delete=models.SET_NULL, null=True)
 
-from django.db import models
+class Comments(models.Model):
+    class Meta:
+        db_table = 'comments'
+    user = models.ForeignKey(UserModel, on_delete=models.SET_NULL, null=True)
+    post = models.ForeignKey('Post', on_delete=models.SET_NULL, null=True)
+    content = models.TextField()
 
 class ShoeTag(models.Model):
     class Meta:

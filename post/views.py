@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.static import serve 
 import os
 from user.views import follow
-from .models import PostImg, Post, Likes, ShoeTag
+from .models import PostImg, Post, Likes, ShoeTag, Comments
 from user.models import UserModel
 from django.contrib import messages
 
@@ -103,3 +103,10 @@ def like(request, post_id):
         else:
             pass
         return redirect('/')
+def comment(request, post_id):
+    content = request.POST.get('comment_input')
+    cur_user = request.user
+    post = Post.objects.get(id = post_id)
+    new_comment = Comments.objects.create(post=post, user = cur_user, content= content)
+    new_comment.save()
+    return redirect('/detail_page/'+ str(post_id))
