@@ -109,6 +109,7 @@ async function like(post_id) {
         }
     }   
 }
+// 첫번째 모달 관련
 const post_modal_background = document.querySelector('.bt_post_modal_background');
 const post_modal = document.querySelector('.bt_post_modal');
 
@@ -120,14 +121,51 @@ post_modal_background.addEventListener('click', function (e) {
 function open_post_modal(post_id) {
     document.querySelector('.bt_post_modal_background').style.display = "flex"
     document.body.style.overflow = 'hidden';
-    let modal_left_now = parseInt((window.innerWidth - 1100) / 2)
-    let modal_top_now = parseInt((window.innerHeight - 800) / 2)
+    console.log(post_id)
+
+    let modal_top_now = parseInt((window.innerHeight - post_modal.clientHeight) / 2)
+    let modal_left_now = parseInt((window.innerWidth - post_modal.clientWidth) / 2)
     let post_modal_body = document.querySelector('.bt_post_modal');
     post_modal_body.style.left = modal_left_now + "px";
     post_modal_body.style.top = modal_top_now + "px";
 }
 
 function close_post_modal() {
-    document.querySelector('.post_modal_background').style.display = "none"
+    document.querySelector('.bt_post_modal_background').style.display = "none"
+    document.querySelector('.bt_pm_edit_post_modal').style.display = "none"
     document.body.style.overflow = 'auto';
+
+}
+
+// 수정 모달 관련
+const edit_post_modal_background = document.querySelector('.bt_pm_edit_post_modal_background');
+const edit_post_modal = document.querySelector('.bt_pm_edit_post_modal');
+
+edit_post_modal_background.addEventListener('click', function (e) {
+    if (e.target.classList.contains('bt_pm_edit_post_modal_background')) {
+        close_edit_post_modal()
+    }
+})
+
+function open_edit_post_content(post_id){
+    console.log(post_id)
+    document.querySelector('.bt_pm_edit_post_modal_background').style.display = "flex"
+    document.querySelector('#bt_pm_edit_post_modal_'+post_id).style.display = "flex"
+
+    const bt_pm_b_button_body_text = document.getElementById('bt_pm_b_button_body_text_'+ post_id);
+    bt_pm_b_button_body_text.innerText = document.getElementById('bt_pb_pt_ct_comment_' + post_id).innerText;
+
+    let edit_modal_top_now = parseInt((window.innerHeight - edit_post_modal.clientHeight) / 2)
+    let edit_modal_left_now = parseInt((window.innerWidth - edit_post_modal.clientWidth) / 2)
+    let edit_post_modal_body = document.querySelector('.bt_pm_edit_post_modal');
+    edit_post_modal_body.style.left = edit_modal_left_now + "px";
+    edit_post_modal_body.style.top = edit_modal_top_now + "px";
+}
+
+
+
+function close_edit_post_modal() {
+    document.querySelector('.bt_pm_edit_post_modal_background').style.display = "none"
+    document.querySelector('.bt_pm_edit_post_modal').style.display = "none"
+
 }

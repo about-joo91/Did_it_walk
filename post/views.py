@@ -84,6 +84,7 @@ def main_data(request):
 def main(request, page_name):
     if request.method == 'GET':
         cur_user = request.user
+        cur_user_id = UserModel.objects.get(username = cur_user).id
         send_data = {"request" : request, "page_name" : page_name}
         posts, shoe_tags, is_like_list, all_like_list, comment_list = main_data(send_data)
         
@@ -93,8 +94,10 @@ def main(request, page_name):
         total_datas = zip(posts, shoe_tags, is_like_list, all_like_list, comment_list)
         context={
                 'total_datas' : total_datas,
-                "all_shoe_list" : all_shoe_list
+                "all_shoe_list" : all_shoe_list,
+                "cur_user_id" : cur_user_id
                 }
+
         return render(request, 'post/main_post.html', context)
         
     elif request.method == "POST":
