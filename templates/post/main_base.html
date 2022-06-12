@@ -15,35 +15,40 @@
     <div class="wrap">
         <div class="upload_modal_background">
             <div class="upload_modal">
-                <div class="upload_file_image"></div><!-- 미리 보기 이미지 영역 -->
-                <form id="upload_file_form" class="upload_file_form" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <input type="hideen" name="shoe_tag_id" id="shoe_tag_id_{{all_shoe.id}}">
-                    <input type="file" name="input_file" id="input_file">
-                    <textarea name="input_content" id="input_content" class="input_content" cols="30" rows="10" placeholder="여기에 content를 작성 해 주세요!!"></textarea>
-                    <div class="input_tag_title_area">
-                        <input type="text" name="input_tag_title" class="input_tag_title" id="input_tag_title" placeholder="태그하실 신발의 이름을 골라주세요!!">
-                        {% for all_shoe in all_shoe_list %}
-                        {% if forloop.counter < 30 %}
-                        <div class="input_tag_title_list">
-                            <div class="input_tag_title_list_obj" id="input_tag_title_list_obj_{{all_shoe.tag_title}}" onclick="take_tag_title(`{{all_shoe.tag_title}}`)">
-                                {{all_shoe.tag_title}}
-                            <hr>
+                <div class="modal_title">새 개시물</div>
+                <div class="modal_top">
+                    <div class="upload_file_image"></div><!-- 미리 보기 이미지 영역 -->
+                    <form id="upload_file_form" class="upload_file_form" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hideen" name="shoe_tag_id" id="shoe_tag_id_{{all_shoe.id}}">
+                        <input type="file" name="input_file" id="input_file">
+                        <textarea name="input_content" id="input_content" class="input_content" cols="30" rows="10" placeholder="여기에 content를 작성 해 주세요!!"></textarea>
+                        <div class="input_tag_title_area">
+                            <input type="text" name="input_tag_title" class="input_tag_title" id="input_tag_title" placeholder="태그하실 신발의 이름을 골라주세요!!">
+                            {% for all_shoe in all_shoe_list %}
+                            {% if forloop.counter < 30 %}
+                            <div class="input_tag_title_list">
+                                <div class="input_tag_title_list_obj" id="input_tag_title_list_obj_{{all_shoe.tag_title}}" onclick="take_tag_title(`{{all_shoe.tag_title}}`)">
+                                    {{all_shoe.tag_title}}
+                                <hr>
+                                </div>
                             </div>
+                            {% endif %}
+                            {% endfor %}
                         </div>
-                        {% endif %}
-                        {% endfor %}
+                    </form>
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="error_message">
+                        {{ message.tags }}
+                        {{ message.message }}
                     </div>
-                </form>
-                {% if messages %}
-                {% for message in messages %}
-                <div class="error_message">
-                    {{ message.tags }}
-                    {{ message.message }}
+                    {% endfor %}
+                    {% endif %}
                 </div>
-                {% endfor %}
-                {% endif %}
-                <button form="upload_file_form" type="submit">Upload</button>
+                <div class="modal_bottom">
+                    <button form="upload_file_form" type="submit" class="submit_button">Upload</button>
+                </div>
             </div>
         </div>
         <div class="top">
