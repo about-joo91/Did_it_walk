@@ -87,13 +87,10 @@ html {
     justify-content: center;
     width: 24rem;
 }
-
 .upload_file_image {
     visibility: visible;
     z-index: 5;
-    width: 650px;
-    height: 400px;
-    background-color: green;
+    width: 600px;
     margin-right: 50px;
 }
 
@@ -207,6 +204,12 @@ html {
     background-color: white;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
+}
+
+.bt_pm_b_bd_follow{
+    width: 85%;
+    height: 20%;
+    border: 1px solid black;
 }
 
 .bt_pm_b_button {

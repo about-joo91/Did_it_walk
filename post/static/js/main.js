@@ -158,11 +158,11 @@ function open_post_modal(post_nickname, user_nickname, post_id, content, user_id
     post_modal_background.style.display="flex";
     document.body.style.overflow = 'hidden';
 
-    // let modal_top_now = parseInt((window.innerHeight - post_modal.clientHeight) / 2)
-    // let modal_left_now = parseInt((window.innerWidth - post_modal.clientWidth) / 2)
-    // let post_modal_body = document.querySelector('.bt_post_modal');
-    // post_modal_body.style.left = modal_left_now + "px";
-    // post_modal_body.style.top = modal_top_now + "px";
+    let modal_top_now = parseInt((window.innerHeight - 400) / 2)
+    let modal_left_now = parseInt((window.innerWidth - 400) / 2)
+    let post_modal_body = document.querySelector('.bt_post_modal');
+    post_modal_body.style.left = modal_left_now + "px";
+    post_modal_body.style.top = modal_top_now + "px";
 }
 
 function close_post_modal() {

@@ -91,12 +91,10 @@ html {
 .upload_file_image {
     visibility: visible;
     z-index: 5;
-    width: 650px;
-    height: 400px;
-    background-color: green;
+    width: 600px;
+
     margin-right: 50px;
 }
-
 .um_preview_images {
     width: 650px;
     height: 400px;
@@ -115,10 +113,10 @@ html {
     width: 100%;
     resize: none;
 }
-
 .input_tag_title {
     width: 100%;
     font-size: 1.68rem;
+    position: fixed;
 }
 
 .input_tag_title_area {
@@ -193,8 +191,24 @@ html {
     height: 85%;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
-
+    background-color: white;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.bt_pm_b_bd_follow{
+    width: 85%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    border: 1px solid black;
+    border-radius: 20px;
+    text-decoration: none;
+}
+.bt_pm_b_bd_close {
+    margin-top: 20px;
 }
 
 .bt_pm_b_button_body {
@@ -234,6 +248,8 @@ html {
     justify-content: center;
     align-items: center;
     margin-bottom: 25px;
+    text-decoration: none;
+    color: black;
 }
 
 .bt_pm_b_bd_close {
