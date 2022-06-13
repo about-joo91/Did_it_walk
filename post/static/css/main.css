@@ -181,8 +181,7 @@ html {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    /* border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px; */
+
 }
 .bt_pm_b_button_body{
     width: 100%;
@@ -242,7 +241,7 @@ html {
     height: 20rem;
     background-color: white;
     border: 1px solid black;
-    display: none;
+    display: flex;
     flex-direction: column;
     position: absolute;
     justify-content: center;
@@ -253,20 +252,18 @@ html {
 }
 /* 여기부터 top */
 .top {
-    border: 1px solid black;
     width: 100%;
     height: 111.7rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    /* align-items: center; */
     margin: 0 auto;
 }
 /* 탑 왼쪽의 이미지 */
 .t_left_image {
     width: 54rem;
     height: 71.5rem;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     border-radius: 40px;
     margin-top: 26.9rem;
     background-image: url('https://images.unsplash.com/photo-1593010932917-92bd21088dee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fHNob2VzfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60');
@@ -280,7 +277,7 @@ html {
     flex-direction: column;
     width: 18.8rem;
     height: 96.6rem;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     margin: 4.15rem 5.7rem 0 5.7rem;
     color: #53AA45;
 }
@@ -303,31 +300,34 @@ html {
     justify-content: center;
     align-items: center;
     margin-top: 23.2rem;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     writing-mode: vertical-lr;
     letter-spacing: 1.7rem;
+    font-weight: 600;
+    border-radius: 20px;
 }
 
 /* 탑 오른쪽의 추천 태그부분 */
 .t_right_tag {
     width: 61.9rem;
     height: 77.9rem;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     margin-top: 15.2rem;
 }
 
 .t_rt_subtitle {
     width: 100%;
     height: 6.5rem;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
 }
 
 .t_rt_st_tag {
     width: 30.8rem;
     height: 6.5rem;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     margin: 0 auto;
-    font-size: 40px;
+    font-size: 4rem;
+    font-weight: 600;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -336,7 +336,7 @@ html {
 .t_rt_images_box {
     width: 61.9rem;
     height: 64.1rem;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     display: flex;
     justify-content: space-between;
     align-content: space-between;
@@ -345,8 +345,8 @@ html {
 }
 
 .t_rt_ib_images {
-    width: 25.9rem;
-    height: 25.2rem;
+    width: 16.7rem;
+    height: 16.7rem;
     border: 1px solid red;
     border-radius: 40px;
 }
@@ -364,7 +364,7 @@ html {
 .m_subheader {
     width: 50rem;
     height: 100%;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     display: flex;
     flex-direction: row;
     justify-content: space-between;

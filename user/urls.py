@@ -5,5 +5,5 @@ urlpatterns = [
     path('sign_in/', views.sign_in, name='sign_in'),
     path('sign_out/', views.sign_out, name='sign_out'),
     path('follower/', views.follow_page, name='follow_page'),
-    path('follow/<int:pk>', views.follow, name= 'follow')
+    path('follow/<str:nickname>', views.follow, name= 'follow')
 ]

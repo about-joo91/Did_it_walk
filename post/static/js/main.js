@@ -109,6 +109,7 @@ async function like(post_id) {
         }
     }   
 }
+
 // 첫번째 모달 관련
 const post_modal_background = document.querySelector('.bt_post_modal_background');
 const post_modal = document.querySelector('.bt_post_modal');
@@ -118,28 +119,60 @@ post_modal_background.addEventListener('click', function (e) {
         close_post_modal()
     }
 })
-function open_post_modal(post_id) {
-    document.querySelector('.bt_post_modal_background').style.display = "flex"
-    document.body.style.overflow = 'hidden';
-    console.log(post_id)
 
-    let modal_top_now = parseInt((window.innerHeight - post_modal.clientHeight) / 2)
-    let modal_left_now = parseInt((window.innerWidth - post_modal.clientWidth) / 2)
-    let post_modal_body = document.querySelector('.bt_post_modal');
-    post_modal_body.style.left = modal_left_now + "px";
-    post_modal_body.style.top = modal_top_now + "px";
+function open_post_modal(post_nickname, user_nickname, post_id, content, user_id, is_following) {
+    if (post_nickname === user_nickname){
+        let my_edit_modal = `
+            <div class="bt_post_modal" id="bt_post_modal">
+                <div class= bt_pm_title>${post_nickname}님의 게시물</div>
+                <div class="bt_pm_body">
+                    <div class="bt_pm_b_button_body">
+                        <div class="bt_pm_b_bd_edit" onclick="open_edit_post_content('${user_nickname}', '${post_id}', '${content}', '${is_following}')">수정하기</div>
+                        <div class="bt_pm_b_bd_delete"><a href = "${base_url}/post/delete/${post_id}">삭제하기</a></div>
+                        <div class="bt_pm_b_bd_close" onclick="close_post_modal()">닫기</div>
+                    </div>
+                </div>
+            </div>`
+        post_modal_background.innerHTML = my_edit_modal;
+        
+    }
+    else{
+        if (is_following === "True"){ post_modal_background.innerHTML= `<div class="bt_post_modal" id="bt_post_modal">
+            <div class= bt_pm_title>${post_nickname}님의 게시물</div>
+            <div class="bt_pm_body">
+                <div class="bt_pm_b_button_body">
+                <div class="bt_pm_b_bd_follow"><a href="${base_url}/user/follow/${post_nickname}">팔로우 취소</a></div>
+                    <div class="bt_pm_b_bd_close" onclick="close_post_modal()">닫기</div>
+                </div>
+            </div>` 
+        }else { post_modal_background.innerHTML=`<div class="bt_post_modal" id="bt_post_modal">
+            <div class= bt_pm_title>${post_nickname}님의 게시물</div>
+            <div class="bt_pm_body">
+                <div class="bt_pm_b_button_body">
+                <div class="bt_pm_b_bd_follow"><a href="${base_url}/user/follow/${post_nickname}">팔로우</a></div>
+                    <div class="bt_pm_b_bd_close" onclick="close_post_modal()">닫기</div>
+                </div>
+            </div>` 
+        }
+    }
+    post_modal_background.style.display="flex";
+    document.body.style.overflow = 'hidden';
+
+    // let modal_top_now = parseInt((window.innerHeight - post_modal.clientHeight) / 2)
+    // let modal_left_now = parseInt((window.innerWidth - post_modal.clientWidth) / 2)
+    // let post_modal_body = document.querySelector('.bt_post_modal');
+    // post_modal_body.style.left = modal_left_now + "px";
+    // post_modal_body.style.top = modal_top_now + "px";
 }
 
 function close_post_modal() {
     document.querySelector('.bt_post_modal_background').style.display = "none"
-    document.querySelector('.bt_pm_edit_post_modal').style.display = "none"
     document.body.style.overflow = 'auto';
 
 }
 
 // 수정 모달 관련
 const edit_post_modal_background = document.querySelector('.bt_pm_edit_post_modal_background');
-const edit_post_modal = document.querySelector('.bt_pm_edit_post_modal');
 
 edit_post_modal_background.addEventListener('click', function (e) {
     if (e.target.classList.contains('bt_pm_edit_post_modal_background')) {
@@ -147,25 +180,40 @@ edit_post_modal_background.addEventListener('click', function (e) {
     }
 })
 
-function open_edit_post_content(post_id){
-    console.log(post_id)
-    document.querySelector('.bt_pm_edit_post_modal_background').style.display = "flex"
-    document.querySelector('#bt_pm_edit_post_modal_'+post_id).style.display = "flex"
+function open_edit_post_content(user_nickname, post_id, content, is_following){
 
-    const bt_pm_b_button_body_text = document.getElementById('bt_pm_b_button_body_text_'+ post_id);
-    bt_pm_b_button_body_text.innerText = document.getElementById('bt_pb_pt_ct_comment_' + post_id).innerText;
+    let edit_post_modal_html = 
+    `<div class="bt_pm_edit_post_modal" id="bt_pm_edit_post_modal">
+        <div class= bt_pm_title>${user_nickname}님의 게시물</div>
+            <div class="bt_pm_body">
+                <form id="edit_cotent_form_${post_id}" name="edit_cotent_form_${post_id}" type = "submit" action="${base_url}/post/home/recent/edit_content/${post_id}" class="edit_cotent_form" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
+                <div class="bt_pm_b_button_body">
+                    <textarea name="edit_content_text" id="bt_pm_b_button_body_text_${post_id}" cols="60" rows="7" style=" resize: none; "placeholder = "${content}"></textarea>
+                </div>
+                </form>
+                <div class="bt_pm_b_button">
+                    <button form="edit_cotent_form_${post_id}" type="submit">수정하기</button>
+                </div> 
+            </div>
+    </div>`
+    
+    edit_post_modal_background.innerHTML = edit_post_modal_html;
 
-    let edit_modal_top_now = parseInt((window.innerHeight - edit_post_modal.clientHeight) / 2)
-    let edit_modal_left_now = parseInt((window.innerWidth - edit_post_modal.clientWidth) / 2)
-    let edit_post_modal_body = document.querySelector('.bt_pm_edit_post_modal');
-    edit_post_modal_body.style.left = edit_modal_left_now + "px";
-    edit_post_modal_body.style.top = edit_modal_top_now + "px";
+
+    edit_post_modal_background.style.display="flex";
+    
+    // const bt_pm_b_button_body_text = document.getElementById('bt_pm_b_button_body_text');
+    // bt_pm_b_button_body_text.innerText = document.getElementById('bt_pb_pt_ct_comment';
+
+    let edit_text_post_modal_top_now = parseInt((window.innerHeight - 400) / 2)
+    let edit_text_post_modal_left_now = parseInt((window.innerWidth - 400) / 2)
+    let edit_text_post_modal_body = document.querySelector('.bt_pm_edit_post_modal');
+    edit_text_post_modal_body.style.left = edit_text_post_modal_left_now + "px";
+    edit_text_post_modal_body.style.top = edit_text_post_modal_top_now + "px";
 }
-
-
 
 function close_edit_post_modal() {
     document.querySelector('.bt_pm_edit_post_modal_background').style.display = "none"
     document.querySelector('.bt_pm_edit_post_modal').style.display = "none"
-
 }
