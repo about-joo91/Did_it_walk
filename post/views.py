@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from user.views import follow
 from .models import PostImg, Post, Likes, ShoeTag, Comments
 from user.models import UserModel
 from django.contrib import messages
