@@ -5,6 +5,7 @@ from user.models import UserModel
 from django.contrib import messages
 import boto3
 import config
+import os
 
 # Create your views here.
 def home(request):
@@ -61,8 +62,8 @@ def main(request, page_name = 'recent'):
 
 def upload_file(file, filename, content_type):
     s3 = boto3.client('s3',
-    aws_access_key_id = config.AWS_ACCESS_KEY_ID,
-    aws_secret_access_key = config.AWS_SECRET_ACCESS_KEY)
+    aws_access_key_id = os.environ['AWS_ACCESS_KEY_ID'],
+    aws_secret_access_key = os.environ['AWS_SECRET_ACCESS_KEY'])
     s3.put_object(
         ACL="public-read",
         Bucket = config.BUCKET_NAME,
