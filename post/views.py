@@ -2,9 +2,8 @@ from django.shortcuts import render, redirect
 from .models import PostImg, Post, Likes, ShoeTag, Comments
 from user.models import UserModel
 from django.contrib import messages
-import boto3
 import config
-
+import boto3
 # Create your views here.
 def home(request):
     if request.user.is_authenticated:
@@ -78,6 +77,7 @@ def recent_post_data(user):
     is_like_list = []
     all_like_list = []
     comment_list = []
+    is_following_list = []
     
     for post in recent_posts:
         shoe_tag = post.shoe_tags.all()
@@ -85,39 +85,37 @@ def recent_post_data(user):
         is_like_list.append(Likes.objects.filter(user = user, post = post).exists())
         all_like_list.append(len(Likes.objects.filter(post_id = post.id)))
         comment_list.append(len(Comments.objects.filter(post = post)))
-    
-    total_datas = zip(recent_posts, shoe_tags, is_like_list, all_like_list, comment_list)
+        is_following_list.append(UserModel.objects.filter(followee = user).filter(id=post.user.id).exists())
+    print(is_following_list)
+    total_datas = zip(recent_posts, shoe_tags, is_like_list, all_like_list, comment_list, is_following_list)
     return total_datas
 
 def following_post_data(user):
-    following_posts = following(user)
+    my_follows= UserModel.objects.filter(followee = user)
+    following_posts = []
+    for my_follow in my_follows:
+        following_posts += Post.objects.filter(user_id = my_follow.id)
 
     shoe_tags = []
     is_like_list = []
     all_like_list = []
     comment_list = []
+    is_following_list = []
     for post in following_posts:
         shoe_tag = post.shoe_tags.all()
         shoe_tags.append(*shoe_tag)
         is_like_list.append(Likes.objects.filter(user = user, post = post).exists())
         all_like_list.append(len(Likes.objects.filter(post_id = post.id)))
         comment_list.append(len(Comments.objects.filter(post = post)))
+        is_following_list.append(UserModel.objects.filter(followee = user).filter(id=post.user.id).exists())
 
-    total_datas = zip(following_posts, shoe_tags, is_like_list, all_like_list, comment_list)
+    total_datas = zip(following_posts, shoe_tags, is_like_list, all_like_list, comment_list, is_following_list)
     return total_datas
 
 def suggest_post_data(request):
     total_datas = []
     return total_datas
 
-def following(user):
-    my_follows= UserModel.objects.filter(followee = user)
-    my_follows_posts_list = []
-    for my_follow in my_follows:
-        my_follows_posts = Post.objects.get(user_id = my_follow.id)
-        my_follows_posts_list.append(my_follows_posts)
-
-    return my_follows_posts_list
 
 
 def like(request, post_id):
@@ -148,3 +146,17 @@ def comment_edit(request, comment_id):
     comment.update(content = new_content)
     post_id = comment[0].post.id
     return redirect('/detail_page/'+str(post_id))
+
+def edit_content(request, post_id):
+    new_content = request.POST.get('edit_content_text')
+    post = Post.objects.filter(id = post_id)
+    post.update(contents= new_content)
+
+    return redirect('/post/home/recent')
+
+def delete_content(request, post_id):
+    delete_post = Post.objects.get(id = post_id)
+    delete_post.delete()
+
+    return redirect('/post/home/recent')
+

@@ -43,14 +43,14 @@ def follow_page(request):
 
 
 @login_required
-def follow(request, pk):
+def follow(request, nickname):
     cur_user = request.user
-    clicked_user = UserModel.objects.get(pk=pk)
-    check_followee = UserModel.objects.filter(followee = cur_user).filter(pk = pk)
+    clicked_user = UserModel.objects.get(nickname=nickname)
+    check_followee = UserModel.objects.filter(followee = cur_user).filter(nickname = nickname)
     if check_followee:
         clicked_user.followee.remove(cur_user)
     else:
         clicked_user.followee.add(cur_user)
     user_list = UserModel.objects.all().exclude(username=cur_user.username).exclude(followee=cur_user)
     followers = UserModel.objects.filter(followee = cur_user)
-    return render(request, 'user/follower.html',{'users':user_list, 'followers': followers})
+    return redirect("/post/home/recent")
