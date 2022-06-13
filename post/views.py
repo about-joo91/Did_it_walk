@@ -4,6 +4,8 @@ from user.models import UserModel
 from django.contrib import messages
 import config
 import boto3
+from shoes_tag.recommand_md import recommendation
+
 # Create your views here.
 def home(request):
     if request.user.is_authenticated:
@@ -12,6 +14,7 @@ def home(request):
         return redirect('/user/sign_in')
     
 def main(request, page_name = 'recent'):
+    user = request.user
     if request.method == 'GET':
         all_shoe_list = ShoeTag.objects.all()
         if page_name == "recent":
@@ -24,9 +27,27 @@ def main(request, page_name = 'recent'):
         else:
             total_datas = suggest_post_data()
 
+        recent_posts = Post.objects.filter(user=user).order_by('-created_at')[:3]
+        suggest_shoe_tags = []
+        suggest_posts=[]
+        for recent_post in recent_posts:
+            shoe_tag = recent_post.shoe_tags.all()
+            suggest_shoes_ids = recommendation.find_shoes_recommend(shoe_tag[0].id)
+            for suggest_shoe_id in suggest_shoes_ids:
+                str_suggest_shoe_id = str(suggest_shoe_id)
+                new_shoe_tag = ShoeTag.objects.get(id = str_suggest_shoe_id)
+                print(new_shoe_tag)
+                suggest_shoe_tags.append(new_shoe_tag)
+                suggest_posts += Post.objects.filter(shoe_tags = new_shoe_tag)
+                
+        if len(suggest_shoe_tags) < 9:
+            suggest_shoe_tags = [ShoeTag.objects.get(id = x) for x in range(1,10)]
+            
+
         context={
                 'total_datas' : total_datas,
-                "all_shoe_list" : all_shoe_list
+                "all_shoe_list" : all_shoe_list,
+                "suggest_shoe_tags": suggest_shoe_tags
                 }
         return render(request, 'post/main_post.html', context)
 
@@ -72,22 +93,35 @@ def upload_file(file, filename, content_type):
 
 def recent_post_data(user):
 
-    recent_posts = Post.objects.all()
+    recent_page_posts = Post.objects.all()
     shoe_tags = []
     is_like_list = []
     all_like_list = []
     comment_list = []
     is_following_list = []
+
+    recent_posts = Post.objects.filter(user=user).order_by('-created_at')[:3]
+    suggest_shoe_tags = []
+    suggest_posts = []
+    for recent_post in recent_posts:
+        shoe_tag = recent_post.shoe_tags.all()
+        suggest_shoes = recommendation.find_shoes_recommend(shoe_tag[0].id)
+        for suggest_shoe in suggest_shoes:
+            suggest_shoe_id = str(suggest_shoe)
+            new_shoe_tag = ShoeTag.objects.get(id = suggest_shoe_id)
+            suggest_shoe_tags.append(new_shoe_tag)
+            suggest_posts += Post.objects.filter(shoe_tags = new_shoe_tag)
+
     
-    for post in recent_posts:
+    for post in recent_page_posts:
         shoe_tag = post.shoe_tags.all()
         shoe_tags.append(*shoe_tag)
         is_like_list.append(Likes.objects.filter(user = user, post = post).exists())
         all_like_list.append(len(Likes.objects.filter(post_id = post.id)))
         comment_list.append(len(Comments.objects.filter(post = post)))
         is_following_list.append(UserModel.objects.filter(followee = user).filter(id=post.user.id).exists())
-    print(is_following_list)
-    total_datas = zip(recent_posts, shoe_tags, is_like_list, all_like_list, comment_list, is_following_list)
+
+    total_datas = zip(recent_page_posts, shoe_tags, is_like_list, all_like_list, comment_list, is_following_list)
     return total_datas
 
 def following_post_data(user):
@@ -95,6 +129,17 @@ def following_post_data(user):
     following_posts = []
     for my_follow in my_follows:
         following_posts += Post.objects.filter(user_id = my_follow.id)
+
+    recent_posts = Post.objects.filter(user=user).order_by('-created_at')[:3]
+    suggest_shoe_tags = []
+    for recent_post in recent_posts:
+        shoe_tag = recent_post.shoe_tags.all()
+        suggest_shoes = recommendation.find_shoes_recommend(shoe_tag[0].id)
+        for suggest_shoe in suggest_shoes:
+            suggest_shoe_id = str(suggest_shoe)
+            new_shoe_tag = ShoeTag.objects.get(id = suggest_shoe_id)
+            suggest_shoe_tags.append(new_shoe_tag)
+            suggest_posts += Post.objects.filter(shoe_tags = new_shoe_tag)
 
     shoe_tags = []
     is_like_list = []
@@ -112,8 +157,37 @@ def following_post_data(user):
     total_datas = zip(following_posts, shoe_tags, is_like_list, all_like_list, comment_list, is_following_list)
     return total_datas
 
-def suggest_post_data(request):
-    total_datas = []
+def suggest_post_data(user):
+
+    
+    
+    suggest_posts = []
+    shoe_tags = []
+    is_like_list = []
+    all_like_list = []
+    comment_list = []
+    is_following_list = []
+
+    recent_posts = Post.objects.filter(user=user).order_by('-created_at')[:3]
+    suggest_shoe_tags = []
+    for recent_post in recent_posts:
+        shoe_tag = recent_post.shoe_tags.all()
+        suggest_shoes_ids = recommendation.find_shoes_recommend(shoe_tag[0].id)
+        for suggest_shoe_id in suggest_shoes_ids:
+            str_suggest_shoe_id = str(suggest_shoe_id)
+            new_shoe_tag = ShoeTag.objects.get(id = str_suggest_shoe_id)
+            suggest_shoe_tags.append(new_shoe_tag)
+            suggest_posts += Post.objects.filter(shoe_tags = new_shoe_tag)
+
+    for post in suggest_posts:
+        shoe_tag = post.shoe_tags.all()
+        shoe_tags.append(*shoe_tag)
+        is_like_list.append(Likes.objects.filter(user = user, post = post).exists())
+        all_like_list.append(len(Likes.objects.filter(post_id = post.id)))
+        comment_list.append(len(Comments.objects.filter(post = post)))
+        is_following_list.append(UserModel.objects.filter(followee = user).filter(id=post.user.id).exists())
+
+    total_datas = zip(suggest_posts, shoe_tags, is_like_list, all_like_list, comment_list, is_following_list, suggest_shoe_tags, shoe_tags = [])
     return total_datas
 
 
@@ -159,4 +233,5 @@ def delete_content(request, post_id):
     delete_post.delete()
 
     return redirect('/post/home/recent')
+
 

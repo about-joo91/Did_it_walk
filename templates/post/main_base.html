@@ -63,15 +63,9 @@
                     <div class="t_rt_st_tag">추천 신발 태그</div>
                 </div>
                 <div class="t_rt_images_box">
-                    <div class="t_rt_ib_images"></div>
-                    <div class="t_rt_ib_images"></div>
-                    <div class="t_rt_ib_images"></div>
-                    <div class="t_rt_ib_images"></div>
-                    <div class="t_rt_ib_images"></div>
-                    <div class="t_rt_ib_images"></div>  
-                    <div class="t_rt_ib_images"></div>
-                    <div class="t_rt_ib_images"></div> 
-                    <div class="t_rt_ib_images"></div> 
+                    {% for suggest_shoe in suggest_shoe_tags %}
+                    <div class="t_rt_ib_images"><img src="{{suggest_shoe.tag_image_url}}" width="167px" height="167px"></div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
