@@ -3,7 +3,6 @@
 {% block content %}
 <div class="bottom">
     <div class="bt_post_modal_background" id="bt_post_modal_background_{{post.id}}">
-        
     </div>
     <!-- 수정 모달입니다 -->
     <div class="bt_pm_edit_post_modal_background" id="bt_pm_edit_post_modal_background_{{post.id}}"> 
@@ -12,10 +11,10 @@
     {% for post, shoe_tag, is_like,all_like, comment, is_following in total_datas %}
     
     <div class="bt_pb_post">
-        <div class="bt_pb_pt_img"><a href="{% url 'detail_page' post.id %}" ><img src="{{post.post_img.post_img}}" alt="" width="100%"></a></div>
+        <div class="bt_pb_pt_img"><a href="{% url 'detail_page' post.id %}" ><img class="post_image_tag" src="{{post.post_img.post_img}}" alt="" width="100%"></a></div>
         <div class="bt_pb_pt_content">
             <div class="bt_pb_pt_ct_user">
-                <div class="bt_pb_pt_ct_us_profile_img" onclick="open_post_modal('{{post.user.nickname}}','{{user.nickname}}','{{post.id}}', '{{post.contents}}', '{{user.id}}', '{{is_following}}')"><img src="https://images.unsplash.com/photo-1512374382149-233c42b6a83b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHNob2VzfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60" width="37" height="37" alt=""></div>
+                <div class="bt_pb_pt_ct_us_profile_img" onclick="open_post_modal('{{post.user.nickname}}','{{user.nickname}}','{{post.id}}', '{{post.contents}}', '{{user.id}}', '{{is_following}}')"><img class="profile_circle_avatar" src="{{post.user.profile_url}}" width="37" height="37" alt=""></div>
                 <div class="bt_pb_pt_ct_us_profile_name">{{post.user.nickname}}</div>
             </div>
             <div class="bt_pb_pt_ct_comment" id="bt_pb_pt_ct_comment_{{post.id}}">{{post.contents}}</div>

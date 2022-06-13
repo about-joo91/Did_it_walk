@@ -44,7 +44,8 @@ html {
     border-radius: 5%;
     z-index: 3;
 }
-.modal_title{
+
+.modal_title {
     width: 100%;
     height: 7%;
     display: flex;
@@ -57,7 +58,8 @@ html {
     border-top-right-radius: 47px;
     border-top-left-radius: 47px;
 }
-.modal_top{
+
+.modal_top {
     display: flex;
     flex-direction: row;
     background-color: white;
@@ -66,7 +68,8 @@ html {
     align-items: center;
     justify-content: space-evenly;
 }
-.modal_bottom{
+
+.modal_bottom {
     width: 100%;
     height: 8%;
     display: flex;
@@ -76,6 +79,7 @@ html {
     border-bottom-right-radius: 47px;
     border-bottom-left-radius: 47px;
 }
+
 .upload_file_form {
     visibility: hidden !important;
     display: flex;
@@ -92,11 +96,13 @@ html {
     background-color: green;
     margin-right: 50px;
 }
-.um_preview_images{
+
+.um_preview_images {
     width: 650px;
     height: 400px;
 }
-.submit_button{
+
+.submit_button {
     width: 120px;
     height: 30px;
     border-radius: 20px;
@@ -128,21 +134,25 @@ html {
 .input_tag_title_list {
     width: 100%;
 }
-.input_tag_title_list_obj{
+
+.input_tag_title_list_obj {
     width: 100%;
 }
+
 .input_tag_title_list_obj:hover {
     cursor: pointer;
     color: blue;
     text-decoration: underline blue;
 }
+
 .error_message {
     color: red;
     font-size: 20px;
 }
+
 /* 여기는 post모달 */
-.bt_post_modal_background{
-    background : rgba(0, 0, 0, 0.7);
+.bt_post_modal_background {
+    background: rgba(0, 0, 0, 0.7);
     position: fixed;
     left: 0;
     top: 0;
@@ -151,7 +161,8 @@ html {
     z-index: 2;
     display: none;
 }
-.bt_post_modal{
+
+.bt_post_modal {
     width: 30rem;
     height: 20rem;
     background-color: white;
@@ -165,7 +176,8 @@ html {
     z-index: 3;
     font-size: 22px;
 }
-.bt_pm_title{
+
+.bt_pm_title {
     width: 100%;
     height: 15%;
     display: flex;
@@ -175,7 +187,8 @@ html {
     align-items: center;
     font-weight: bold;
 }
-.bt_pm_body{
+
+.bt_pm_body {
     width: 100%;
     height: 85%;
     display: flex;
@@ -183,7 +196,8 @@ html {
     flex-direction: column;
 
 }
-.bt_pm_b_button_body{
+
+.bt_pm_b_button_body {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -193,14 +207,16 @@ html {
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 }
-.bt_pm_b_button{
+
+.bt_pm_b_button {
     width: 100%;
     height: 5%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.bt_pm_b_bd_edit{
+
+.bt_pm_b_bd_edit {
     width: 80%;
     border: 1px solid black;
     border-radius: 20px;
@@ -209,7 +225,8 @@ html {
     margin-bottom: 20px;
     align-items: center;
 }
-.bt_pm_b_bd_delete{
+
+.bt_pm_b_bd_delete {
     width: 80%;
     border: 1px solid black;
     border-radius: 20px;
@@ -218,7 +235,8 @@ html {
     align-items: center;
     margin-bottom: 25px;
 }
-.bt_pm_b_bd_close{
+
+.bt_pm_b_bd_close {
     width: 17%;
     border: 1px solid black;
     border-radius: 10px;
@@ -226,8 +244,9 @@ html {
     justify-content: center;
     align-items: center;
 }
-.bt_pm_edit_post_modal_background{
-    background : rgba(0, 0, 0, 0.1);
+
+.bt_pm_edit_post_modal_background {
+    background: rgba(0, 0, 0, 0.1);
     position: fixed;
     left: 0;
     top: 0;
@@ -236,7 +255,8 @@ html {
     z-index: 2;
     display: none;
 }
-.bt_pm_edit_post_modal{
+
+.bt_pm_edit_post_modal {
     width: 50rem;
     height: 20rem;
     background-color: white;
@@ -250,6 +270,7 @@ html {
     z-index: 3;
     font-size: 22px;
 }
+
 /* 여기부터 top */
 .top {
     width: 100%;
@@ -259,11 +280,11 @@ html {
     justify-content: center;
     margin: 0 auto;
 }
+
 /* 탑 왼쪽의 이미지 */
 .t_left_image {
     width: 54rem;
     height: 71.5rem;
-    /* border: 1px solid black; */
     border-radius: 40px;
     margin-top: 26.9rem;
     background-image: url('https://images.unsplash.com/photo-1593010932917-92bd21088dee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fHNob2VzfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60');
@@ -277,7 +298,6 @@ html {
     flex-direction: column;
     width: 18.8rem;
     height: 96.6rem;
-    /* border: 1px solid black; */
     margin: 4.15rem 5.7rem 0 5.7rem;
     color: #53AA45;
 }
@@ -295,12 +315,11 @@ html {
 }
 
 .t_mt_logo {
-    font-size: 60px;
+    font-size: 65px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 23.2rem;
-    /* border: 1px solid black; */
+    margin-top: 26.2rem;
     writing-mode: vertical-lr;
     letter-spacing: 1.7rem;
     font-weight: 600;
@@ -311,20 +330,17 @@ html {
 .t_right_tag {
     width: 61.9rem;
     height: 77.9rem;
-    /* border: 1px solid black; */
     margin-top: 15.2rem;
 }
 
 .t_rt_subtitle {
     width: 100%;
     height: 6.5rem;
-    /* border: 1px solid blue; */
 }
 
 .t_rt_st_tag {
     width: 30.8rem;
     height: 6.5rem;
-    /* border: 1px solid red; */
     margin: 0 auto;
     font-size: 4rem;
     font-weight: 600;
@@ -336,7 +352,6 @@ html {
 .t_rt_images_box {
     width: 61.9rem;
     height: 64.1rem;
-    /* border: 1px solid blue; */
     display: flex;
     justify-content: space-between;
     align-content: space-between;
@@ -347,7 +362,6 @@ html {
 .t_rt_ib_images {
     width: 16.7rem;
     height: 16.7rem;
-    border: 1px solid red;
     border-radius: 40px;
 }
 
@@ -355,7 +369,6 @@ html {
 .middle {
     width: 100%;
     height: 5, 7rem;
-    border: 1px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -364,7 +377,6 @@ html {
 .m_subheader {
     width: 50rem;
     height: 100%;
-    /* border: 1px solid blue; */
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -401,51 +413,54 @@ html {
 
 .button {
     width: 8rem;
-    height: 8rem;
+    height: 7.2rem;
     border-radius: 25px;
     position: fixed;
     left: 85%;
     top: 90%;
+    font-size: 70px;
     background-color: green;
+    text-align: center;
+    color: white;
+    font-family: 'Hi Melody';
+    line-height: 8rem;
+    padding-top: 0.5rem;
 }
 
 /* 여기부터 bottom 게시물들 모아놓은 곳 */
 .bottom {
     width: 100%;
-    border: 1px solid black;
     display: flex;
-    /* justify-content: space-between; */
+    justify-content: space-evenly;
     flex-wrap: wrap;
 }
 
 .bt_pb_post {
-    width: 30rem;
+    width: 35rem;
     height: auto;
-    border: 1px solid black;
-    margin: 5rem 6.2rem 2rem 6.2rem;
+    margin: 5rem 3.2rem 2rem 3.2rem;
 }
 
 .bt_pb_pt_img {
-    width: 30rem;
+    width: 35rem;
     border-radius: 40px;
 }
-.bt_pb_pt_img:hover{
-    width: 30.2rem;
+
+.bt_pb_pt_img:hover {
+    width: 38rem;
 }
+
 /* width가 30인데 margin-left때문에 29 */
 .bt_pb_pt_content {
     width: 100%;
     height: 22.5rem;
-    border: 1px solid blue;
     margin-top: 1.5rem;
     font-size: 17px;
-    /* display: flex; */
 }
 
 .bt_pb_pt_ct_user {
     width: 100%;
     height: 3.7rem;
-    border: 1px solid blue;
     display: flex;
 }
 
@@ -467,7 +482,9 @@ html {
     margin-top: 1rem;
     font-size: 21px;
 }
-.bt_pb_ct_st_ti_tag_name{
+
+.bt_pb_ct_st_ti_tag_name {
+    font-size: 14px;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -495,11 +512,27 @@ html {
     width: 8rem;
     height: 8rem;
     border-radius: 20px;
-    border: 1px solid red;
     background-position: center;
     background-size: cover;
 }
 
 .bi-heart-fill {
     color: red;
+}
+
+.profile_circle_avatar {
+    border-radius: 100%;
+}
+
+.post_image_tag {
+    border-radius: 15px;
+}
+
+.main_profile_img {
+    left: 175rem;
+    top: 5rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    position: absolute;
 }
