@@ -4,7 +4,6 @@ from .models import PostImg, Post, Likes, ShoeTag, Comments
 from user.models import UserModel
 from django.contrib import messages
 import boto3
-import config
 import os
 
 # Create your views here.
