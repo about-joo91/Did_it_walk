@@ -19,7 +19,7 @@ class Post(models.Model):
 class PostImg(models.Model):
     class Meta:
         db_table = "Post_Img"
-    post_img = models.ImageField(upload_to="media/")
+    post_img = models.URLField()
 
 class Likes(models.Model):
     class Meta:

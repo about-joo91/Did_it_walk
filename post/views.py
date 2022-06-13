@@ -1,11 +1,10 @@
-import json
 from django.shortcuts import render, redirect
-from django.views.static import serve 
-import os
 from user.views import follow
 from .models import PostImg, Post, Likes, ShoeTag, Comments
 from user.models import UserModel
 from django.contrib import messages
+import boto3
+import config
 
 # Create your views here.
 def home(request):
@@ -33,15 +32,18 @@ def main(request, page_name = 'recent'):
                 }
         return render(request, 'post/main_post.html', context)
 
-        
     elif request.method == "POST":
         user_data = request.user
         input_image = request.FILES.get('input_file', '')
         input_content = request.POST.get('input_content')
         input_tag_title = request.POST.get('input_tag_title')
+        
         if input_image and input_content and input_tag_title:
-                
-            Post_Img_info = PostImg(post_img = input_image)
+            splited_file = str(input_image).split('.')
+            filename , content_type = splited_file[0], splited_file[1]
+            image_url = upload_file(input_image, filename, content_type)
+        
+            Post_Img_info = PostImg(post_img = image_url)
             Post_Img_info.save()
 
             shoe_tag_by_title = ShoeTag.objects.filter(tag_title=input_tag_title)[0]
@@ -55,8 +57,20 @@ def main(request, page_name = 'recent'):
             return redirect('/post/home/recent')
         else : 
             messages.info(request, 'image나 content가 비어있습니다.')
-            return render(request, 'post/main_recent.html')
+            return render(request, 'post/main_base.html')
 
+def upload_file(file, filename, content_type):
+    s3 = boto3.client('s3',
+    aws_access_key_id = config.AWS_ACCESS_KEY_ID,
+    aws_secret_access_key = config.AWS_SECRET_ACCESS_KEY)
+    s3.put_object(
+        ACL="public-read",
+        Bucket = config.BUCKET_NAME,
+        Body = file,
+        Key = filename,
+        ContentType = content_type
+    )
+    return f'https://diditwalk.s3.ap-northeast-2.amazonaws.com/{filename}'
 
 def recent_post_data(user):
 
@@ -106,10 +120,6 @@ def following(user):
 
     return my_follows_posts_list
 
-def show_image(request, obj_id):
-    post_imgs = PostImg.objects.get(id=obj_id)
-    image_path = post_imgs.post_img.path
-    return serve(request, os.path.basename(image_path), os.path.dirname(image_path))
 
 def like(request, post_id):
     if request.method == 'POST':
