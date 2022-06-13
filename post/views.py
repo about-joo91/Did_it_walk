@@ -25,7 +25,7 @@ def main(request, page_name = 'recent'):
             total_datas = following_post_data(request.user)
 
         else:
-            total_datas = suggest_post_data()
+            total_datas = suggest_post_data(request.user)
 
         recent_posts = Post.objects.filter(user=user).order_by('-created_at')[:3]
         suggest_shoe_tags = []
@@ -36,7 +36,6 @@ def main(request, page_name = 'recent'):
             for suggest_shoe_id in suggest_shoes_ids:
                 str_suggest_shoe_id = str(suggest_shoe_id)
                 new_shoe_tag = ShoeTag.objects.get(id = str_suggest_shoe_id)
-                print(new_shoe_tag)
                 suggest_shoe_tags.append(new_shoe_tag)
                 suggest_posts += Post.objects.filter(shoe_tags = new_shoe_tag)
                 
@@ -132,6 +131,7 @@ def following_post_data(user):
 
     recent_posts = Post.objects.filter(user=user).order_by('-created_at')[:3]
     suggest_shoe_tags = []
+    suggest_posts = []
     for recent_post in recent_posts:
         shoe_tag = recent_post.shoe_tags.all()
         suggest_shoes = recommendation.find_shoes_recommend(shoe_tag[0].id)
@@ -159,8 +159,6 @@ def following_post_data(user):
 
 def suggest_post_data(user):
 
-    
-    
     suggest_posts = []
     shoe_tags = []
     is_like_list = []
@@ -170,14 +168,19 @@ def suggest_post_data(user):
 
     recent_posts = Post.objects.filter(user=user).order_by('-created_at')[:3]
     suggest_shoe_tags = []
-    for recent_post in recent_posts:
-        shoe_tag = recent_post.shoe_tags.all()
-        suggest_shoes_ids = recommendation.find_shoes_recommend(shoe_tag[0].id)
-        for suggest_shoe_id in suggest_shoes_ids:
-            str_suggest_shoe_id = str(suggest_shoe_id)
-            new_shoe_tag = ShoeTag.objects.get(id = str_suggest_shoe_id)
-            suggest_shoe_tags.append(new_shoe_tag)
-            suggest_posts += Post.objects.filter(shoe_tags = new_shoe_tag)
+    if len(recent_posts) <=3:
+        suggest_shoe_tags = [ShoeTag.objects.get(id = x) for x in range(1,10)]
+        for suggest_shoe_tag in suggest_shoe_tags:
+            suggest_posts += Post.objects.filter(shoe_tags = suggest_shoe_tag)
+    else:
+        for recent_post in recent_posts:
+            shoe_tag = recent_post.shoe_tags.all()
+            suggest_shoes_ids = recommendation.find_shoes_recommend(shoe_tag[0].id)
+            for suggest_shoe_id in suggest_shoes_ids:
+                str_suggest_shoe_id = str(suggest_shoe_id)
+                new_shoe_tag = ShoeTag.objects.get(id = str_suggest_shoe_id)
+                suggest_shoe_tags.append(new_shoe_tag)
+                suggest_posts += Post.objects.filter(shoe_tags = new_shoe_tag)
 
     for post in suggest_posts:
         shoe_tag = post.shoe_tags.all()
@@ -187,7 +190,7 @@ def suggest_post_data(user):
         comment_list.append(len(Comments.objects.filter(post = post)))
         is_following_list.append(UserModel.objects.filter(followee = user).filter(id=post.user.id).exists())
 
-    total_datas = zip(suggest_posts, shoe_tags, is_like_list, all_like_list, comment_list, is_following_list, suggest_shoe_tags, shoe_tags = [])
+    total_datas = zip(suggest_posts, shoe_tags, is_like_list, all_like_list, comment_list, is_following_list)
     return total_datas
 
 
