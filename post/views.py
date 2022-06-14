@@ -92,7 +92,7 @@ def upload_file(file, filename, content_type):
 
 def recent_post_data(user):
 
-    recent_page_posts = Post.objects.all()
+    recent_page_posts = Post.objects.all().order_by('-created_at')
     shoe_tags = []
     is_like_list = []
     all_like_list = []
