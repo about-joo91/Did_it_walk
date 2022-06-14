@@ -7,8 +7,9 @@
 .rec_shoe_tag {
     width: 60px;
     height: 60px;
-    background-color: rgb(152, 149, 93);
+    background-color: rgba(152, 149, 93, 0.6);
     border-radius: 15px;
+    margin-right: 10px;
 }
 
 .rec_shoe_tag_wrapper {
@@ -120,4 +121,17 @@
 
 .confirm_btn:hover {
     cursor: pointer;
+}
+
+.follower_box {
+    display: flex;
+    margin: 0 0 20px 40px;
+    font-family: 'Hi Melody';
+    width: 300px;
+    justify-content: space-between;
+}
+
+.cnt_follow {
+    text-align: center;
+    margin-top: 5px;
 }

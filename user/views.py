@@ -42,8 +42,9 @@ def profile_page(request):
     cur_user = request.user
     shoe_tag_rec = ShoeTag.objects.filter(shoe_taggie__user = cur_user)
     followers = UserModel.objects.filter(followee = cur_user)
+    foloowees = UserModel.objects.filter(follow = cur_user)
     my_posts = Post.objects.filter(user = cur_user)
-    return render(request, 'user/profile.html', {'followers':followers, 'shoe_tag_rec' : shoe_tag_rec, 'my_posts':my_posts})
+    return render(request, 'user/profile.html', {'follwees':foloowees,'followers':followers, 'shoe_tag_rec' : shoe_tag_rec, 'my_posts':my_posts})
 
 
 @login_required

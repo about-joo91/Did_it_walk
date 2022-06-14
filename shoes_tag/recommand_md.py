@@ -10,6 +10,6 @@ class Recommend:
     def find_shoes_recommend(self, shoes):
         shoe_name = str(shoes) + '.png'
         recommend_items = self.cos_sim_df[shoe_name].sort_values(ascending=False)[1:4].index
-        return recommend_items
+        return list(map(lambda x : x+1 , recommend_items))
     
 recommendation = Recommend()
