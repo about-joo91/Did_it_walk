@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Hi+Melody&family=Indie+Flower&display=swap');
+
+* {
+    background-color: #F1F1EB;
+}
+
+.rec_shoe_tag {
+    width: 60px;
+    height: 60px;
+    background-color: rgb(152, 149, 93);
+    border-radius: 15px;
+}
+
+.rec_shoe_tag_wrapper {
+    width: 300px;
+    font-family: 'Indie Flower';
+    margin-left: 40px;
+}
+
+.up_box {
+    display: flex;
+}
+
+.up_content {
+    margin-left: 20px;
+    align-self: center;
+    font-family: 'Indie Flower';
+}
+
+.tag_box {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.up_circle_avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+}
+
+.my_page_wrapper {
+    width: 1000px;
+    margin: 100px auto auto auto;
+}
+
+.user_profile {
+    margin-left: 40px;
+}
+
+.my_post_img {
+    width: 300px;
+    height: 400px;
+    margin: 10px 0;
+}
+
+.my_posts_box {
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    display: flex;
+}
+
+
+.edit_box {
+    margin: 7px 0 40px 60px;
+}
+
+.edit_btn {
+    text-decoration: none;
+    color: black;
+}
+
+.edit_btn:hover {
+    cursor: pointer;
+}
+
+.mini_modal_wrapper {
+    background: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    display: none;
+}
+
+.mini_modal {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 350px;
+    border-radius: 15px;
+}
+
+.preview_profile {
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    margin: auto;
+}
+
+.modal_content {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 50px auto auto auto;
+    align-items: center;
+}
+
+.preview_profile_input {
+    width: 150px;
+}
+
+.preview_desc {
+    font-size: 12px;
+}
+
+.confirm_btn:hover {
+    cursor: pointer;
+}

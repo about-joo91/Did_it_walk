@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="mini_modal_wrapper">
+        <div class="mini_modal">
+            <div class="modal_content">
+                <img class="preview_profile" src={{user.profile_url}} alt="">
+                <br>
+                <div class="preview_desc">프로필 이미지를 선택해주세요</div>
+                <br>
+                <input class="preview_profile_input" type="file">
+                <br>
+                <div onclick="add_profile()" class="confirm_btn">변경</div>
+            </div>
+        </div>
+    </div>
+    <div class="my_page_wrapper">
+        <div class="user_profile">
+            <div class="up_box">
+                <img class="up_circle_avatar" src="{{user.profile_url}}" alt="">
+                <div class="up_content">
+                    <div class="up_username">
+                        {{user.username}}
+                    </div>
+                    <div class="up_nickname">
+                        {{user.nickname}}
+                    </div>
+                </div>
+            </div>
+            <div class="edit_box">
+                <div class="edit_btn">편집</div>
+            </div>
+        </div>
+
+        <div class="rec_shoe_tag_wrapper">
+            <div>recent shoe tags</div>
+            <div class="tag_box">
+                {% for shoe_tag in shoe_tag_rec%}
+                <img class="rec_shoe_tag" src="{{shoe_tag.tag_image_url}}">
+                {% endfor %}
+            </div>
+        </div>
+        <hr class="solid">
+        <div class="my_posts_box">
+            {% for my_post in my_posts %}
+            <img class="my_post_img" src="{{my_post.post_img.post_img}}" alt="">
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+<script src="{% static 'js/profile.js' %}"></script>
+
+</html>

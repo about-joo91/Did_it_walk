@@ -100,14 +100,14 @@ async function like(post_id) {
         }
     })
     if (result.ok) {
-        if(like_button.classList.contains("bi-heart-fill")){
+        if (like_button.classList.contains("bi-heart-fill")) {
             like_button.classList.replace('bi-heart-fill', 'bi-heart')
             like_count.innerText - parseInt(like_count.innerText) - 1
         } else {
             like_button.classList.replace('bi-heart', 'bi-heart-fill')
             like_count.innerText - parseInt(like_count.innerText) + 1
         }
-    }   
+    }
 }
 // 첫번째 모달 관련
 const post_modal_background = document.querySelector('.bt_post_modal_background');
@@ -147,12 +147,12 @@ edit_post_modal_background.addEventListener('click', function (e) {
     }
 })
 
-function open_edit_post_content(post_id){
+function open_edit_post_content(post_id) {
     console.log(post_id)
     document.querySelector('.bt_pm_edit_post_modal_background').style.display = "flex"
-    document.querySelector('#bt_pm_edit_post_modal_'+post_id).style.display = "flex"
+    document.querySelector('#bt_pm_edit_post_modal_' + post_id).style.display = "flex"
 
-    const bt_pm_b_button_body_text = document.getElementById('bt_pm_b_button_body_text_'+ post_id);
+    const bt_pm_b_button_body_text = document.getElementById('bt_pm_b_button_body_text_' + post_id);
     bt_pm_b_button_body_text.innerText = document.getElementById('bt_pb_pt_ct_comment_' + post_id).innerText;
 
     let edit_modal_top_now = parseInt((window.innerHeight - edit_post_modal.clientHeight) / 2)

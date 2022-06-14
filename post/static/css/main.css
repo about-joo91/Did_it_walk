@@ -20,6 +20,46 @@ html {
 }
 
 /* 모달부분 */
+.profile_modal_wrapper {
+    background: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    display: none;
+}
+
+.profile_modal {
+    padding-top: 15px;
+    text-align: center;
+    font-size: 23px;
+    position: absolute;
+    top: 12rem;
+    left: 166rem;
+    width: 150px;
+    height: 100px;
+}
+
+.fm_profile_edit_btn {
+    text-decoration: none;
+    color: black;
+}
+
+.fm_profile_edit_btn:hover {
+    cursor: pointer;
+}
+
+.fm_logout_btn {
+    text-decoration: none;
+    color: black;
+}
+
+.fm_logout_btn:hover {
+    cursor: pointer;
+}
+
 .upload_modal_background {
     background: rgba(0, 0, 0, 0.7);
     position: fixed;
@@ -95,6 +135,7 @@ html {
 
     margin-right: 50px;
 }
+
 .um_preview_images {
     width: 650px;
     height: 400px;
@@ -113,8 +154,10 @@ html {
     width: 100%;
     resize: none;
 }
+
 .input_tag_title {
-    width: 100%;
+    position: fixed;
+    width: 230px;
     font-size: 1.68rem;
     position: fixed;
 }
@@ -197,16 +240,18 @@ html {
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 }
-.bt_pm_b_bd_follow{
+
+.bt_pm_b_bd_follow {
     width: 85%;
     height: 40%;
+    text-decoration: none;
     display: flex;
     justify-content: center;
     margin-bottom: 30px;
     border: 1px solid black;
     border-radius: 20px;
-    text-decoration: none;
 }
+
 .bt_pm_b_bd_close {
     margin-top: 20px;
 }
@@ -435,12 +480,16 @@ html {
     left: 85%;
     top: 90%;
     font-size: 70px;
-    background-color: green;
+    background-color: #53AA45;
     text-align: center;
     color: white;
     font-family: 'Hi Melody';
     line-height: 8rem;
     padding-top: 0.5rem;
+}
+
+.button:hover {
+    cursor: pointer;
 }
 
 /* 여기부터 bottom 게시물들 모아놓은 곳 */

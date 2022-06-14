@@ -4,6 +4,7 @@ urlpatterns = [
     path('sign_up/', views.sign_up, name='sign_up'),
     path('sign_in/', views.sign_in, name='sign_in'),
     path('sign_out/', views.sign_out, name='sign_out'),
-    path('follower/', views.follow_page, name='follow_page'),
-    path('follow/<str:nickname>', views.follow, name= 'follow')
+    path('profile/', views.profile_page, name='profile_page'),
+    path('profile/upload', views.profile_upload, name='profile_upload'),
+    path('follow/<str:nickname>', views.follow, name= 'follow'),
 ]

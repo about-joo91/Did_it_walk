@@ -100,14 +100,14 @@ async function like(post_id) {
         }
     })
     if (result.ok) {
-        if(like_button.classList.contains("bi-heart-fill")){
+        if (like_button.classList.contains("bi-heart-fill")) {
             like_button.classList.replace('bi-heart-fill', 'bi-heart')
             like_count.innerText - parseInt(like_count.innerText) - 1
         } else {
             like_button.classList.replace('bi-heart', 'bi-heart-fill')
             like_count.innerText - parseInt(like_count.innerText) + 1
         }
-    }   
+    }
 }
 
 // 첫번째 모달 관련
@@ -121,41 +121,43 @@ post_modal_background.addEventListener('click', function (e) {
 })
 
 function open_post_modal(post_nickname, user_nickname, post_id, content, user_id, is_following) {
-    if (post_nickname === user_nickname){
+    if (post_nickname === user_nickname) {
         let my_edit_modal = `
             <div class="bt_post_modal" id="bt_post_modal">
                 <div class= bt_pm_title>${post_nickname}님의 게시물</div>
                 <div class="bt_pm_body">
                     <div class="bt_pm_b_button_body">
                         <div class="bt_pm_b_bd_edit" onclick="open_edit_post_content('${user_nickname}', '${post_id}', '${content}', '${is_following}')">수정하기</div>
-                        <div class="bt_pm_b_bd_delete"><a href = "${base_url}/post/delete/${post_id}">삭제하기</a></div>
+                        <div class="bt_pm_b_bd_delete"><a class="delete_color" href = "${base_url}/post/delete/${post_id}">삭제하기</a></div>
                         <div class="bt_pm_b_bd_close" onclick="close_post_modal()">닫기</div>
                     </div>
                 </div>
             </div>`
         post_modal_background.innerHTML = my_edit_modal;
-        
+
     }
-    else{
-        if (is_following === "True"){ post_modal_background.innerHTML= `<div class="bt_post_modal" id="bt_post_modal">
+    else {
+        if (is_following === "True") {
+            post_modal_background.innerHTML = `<div class="bt_post_modal" id="bt_post_modal">
             <div class= bt_pm_title>${post_nickname}님의 게시물</div>
             <div class="bt_pm_body">
                 <div class="bt_pm_b_button_body">
                 <div class="bt_pm_b_bd_follow"><a href="${base_url}/user/follow/${post_nickname}">팔로우 취소</a></div>
                     <div class="bt_pm_b_bd_close" onclick="close_post_modal()">닫기</div>
                 </div>
-            </div>` 
-        }else { post_modal_background.innerHTML=`<div class="bt_post_modal" id="bt_post_modal">
+            </div>`
+        } else {
+            post_modal_background.innerHTML = `<div class="bt_post_modal" id="bt_post_modal">
             <div class= bt_pm_title>${post_nickname}님의 게시물</div>
             <div class="bt_pm_body">
                 <div class="bt_pm_b_button_body">
                 <div class="bt_pm_b_bd_follow"><a href="${base_url}/user/follow/${post_nickname}">팔로우</a></div>
                     <div class="bt_pm_b_bd_close" onclick="close_post_modal()">닫기</div>
                 </div>
-            </div>` 
+            </div>`
         }
     }
-    post_modal_background.style.display="flex";
+    post_modal_background.style.display = "flex";
     document.body.style.overflow = 'hidden';
 
     let modal_top_now = parseInt((window.innerHeight - 400) / 2)
@@ -180,10 +182,10 @@ edit_post_modal_background.addEventListener('click', function (e) {
     }
 })
 
-function open_edit_post_content(user_nickname, post_id, content, is_following){
+function open_edit_post_content(user_nickname, post_id, content, is_following) {
 
-    let edit_post_modal_html = 
-    `<div class="bt_pm_edit_post_modal" id="bt_pm_edit_post_modal">
+    let edit_post_modal_html =
+        `<div class="bt_pm_edit_post_modal" id="bt_pm_edit_post_modal">
         <div class= bt_pm_title>${user_nickname}님의 게시물</div>
             <div class="bt_pm_body">
                 <form id="edit_cotent_form_${post_id}" name="edit_cotent_form_${post_id}" type = "submit" action="${base_url}/post/home/recent/edit_content/${post_id}" class="edit_cotent_form" method="post" enctype="multipart/form-data">
@@ -197,12 +199,12 @@ function open_edit_post_content(user_nickname, post_id, content, is_following){
                 </div> 
             </div>
     </div>`
-    
+
     edit_post_modal_background.innerHTML = edit_post_modal_html;
 
 
-    edit_post_modal_background.style.display="flex";
-    
+    edit_post_modal_background.style.display = "flex";
+
     // const bt_pm_b_button_body_text = document.getElementById('bt_pm_b_button_body_text');
     // bt_pm_b_button_body_text.innerText = document.getElementById('bt_pb_pt_ct_comment';
 
@@ -217,3 +219,16 @@ function close_edit_post_modal() {
     document.querySelector('.bt_pm_edit_post_modal_background').style.display = "none"
     document.querySelector('.bt_pm_edit_post_modal').style.display = "none"
 }
+
+
+const main_profile_img = document.querySelector('.main_profile_img');
+const profile_modal_wrapper = document.querySelector('.profile_modal_wrapper');
+main_profile_img.addEventListener('click', function () {
+    profile_modal_wrapper.style.display = 'block';
+})
+
+profile_modal_wrapper.addEventListener('click', function (e) {
+    if (e.target.classList.contains('profile_modal_wrapper')) {
+        profile_modal_wrapper.style.display = 'none';
+    }
+})

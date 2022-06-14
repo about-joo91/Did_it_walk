@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ko-KR">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,8 +11,16 @@
     <title>main</title>
 
 </head>
+
 <body>
-    <img class="main_profile_img" src = {{user.profile_url}}>
+    <img class="main_profile_img" src={{user.profile_url}}>
+    <div class="profile_modal_wrapper">
+        <div class="profile_modal">
+            <a class="fm_profile_edit_btn" href="/user/profile/">마이페이지</a>
+            <hr class="solid">
+            <a href="/user/sign_out/" class="fm_logout_btn">로그아웃</a>
+        </div>
+    </div>
     <div class="wrap">
         <div class="upload_modal_background">
             <div class="upload_modal">
@@ -22,64 +31,69 @@
                         {% csrf_token %}
                         <input type="hideen" name="shoe_tag_id" id="shoe_tag_id_{{all_shoe.id}}">
                         <input type="file" name="input_file" id="input_file">
-                        <textarea name="input_content" id="input_content" class="input_content" cols="30" rows="10" placeholder="여기에 content를 작성 해 주세요!!"></textarea>
+                        <textarea name="input_content" id="input_content" class="input_content" cols="30" rows="10"
+                            placeholder="여기에 content를 작성 해 주세요!!"></textarea>
                         <div class="input_tag_title_area">
-                            <input type="text" name="input_tag_title" class="input_tag_title" id="input_tag_title" placeholder="태그하실 신발의 이름을 골라주세요!!">
+                            <input type="text" name="input_tag_title" class="input_tag_title" id="input_tag_title"
+                                placeholder="태그하실 신발의 이름을 골라주세요!!">
                             {% for all_shoe in all_shoe_list %}
-                            {% if forloop.counter < 30 %}
-                            <div class="input_tag_title_list">
-                                <div class="input_tag_title_list_obj" id="input_tag_title_list_obj_{{all_shoe.tag_title}}" onclick="take_tag_title(`{{all_shoe.tag_title}}`)">
+                            {% if forloop.counter < 30 %} <div class="input_tag_title_list">
+                                <div class="input_tag_title_list_obj"
+                                    id="input_tag_title_list_obj_{{all_shoe.tag_title}}"
+                                    onclick="take_tag_title(`{{all_shoe.tag_title}}`)">
                                     {{all_shoe.tag_title}}
-                                <hr>
+                                    <hr>
                                 </div>
-                            </div>
-                            {% endif %}
-                            {% endfor %}
                         </div>
-                    </form>
-                    {% if messages %}
-                    {% for message in messages %}
-                    <div class="error_message">
-                        {{ message.tags }}
-                        {{ message.message }}
-                    </div>
-                    {% endfor %}
-                    {% endif %}
+                        {% endif %}
+                        {% endfor %}
                 </div>
-                <div class="modal_bottom">
-                    <button form="upload_file_form" type="submit" class="submit_button">Upload</button>
+                </form>
+                {% if messages %}
+                {% for message in messages %}
+                <div class="error_message">
+                    {{ message.tags }}
+                    {{ message.message }}
                 </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="modal_bottom">
+                <button form="upload_file_form" type="submit" class="submit_button">Upload</button>
             </div>
         </div>
-        <div class="top">
-            <div class="t_left_image">
-            </div>
-            <div class="t_middle_title">
-                <div class="t_mt_title">ㄷㅅㄱ</div>
-                <div class="t_mt_logo">딛고 서고 걷다</div>
-            </div>
-            <div class="t_right_tag">
-                <div class="t_rt_subtitle">
-                    <div class="t_rt_st_tag">추천 신발 태그</div>
-                </div>
-                <div class="t_rt_images_box">
-                    {% for suggest_shoe in suggest_shoe_tags %}
-                    <div class="t_rt_ib_images"><img src="{{suggest_shoe.tag_image_url}}" width="167px" height="167px"></div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-        <div class="button" onclick="open_modal()">+</div>
-        <div class="middle">
-            <div class="m_subheader">
-                <div class="m_sb_recente"><a href="/post/home/recent" class="a_href">최신</a></div>
-                <div class="m_sb_suggest"><a href="/post/home/suggest"class="a_href">추천</a></div>
-                <div class="m_sb_following"><a href="/post/home/following"class="a_href">팔로잉</a></div>
-            </div>
-        </div>
-        {% block content %}{% endblock  %}
     </div>
-    
+    <div class="top">
+        <div class="t_left_image">
+        </div>
+        <div class="t_middle_title">
+            <div class="t_mt_title">ㄷㅅㄱ</div>
+            <div class="t_mt_logo">딛고 서고 걷다</div>
+        </div>
+        <div class="t_right_tag">
+            <div class="t_rt_subtitle">
+                <div class="t_rt_st_tag">추천 신발</div>
+            </div>
+            <div class="t_rt_images_box">
+                {% for suggest_shoe in suggest_shoe_tags %}
+                <div class="t_rt_ib_images"><img src="{{suggest_shoe.tag_image_url}}" width="167px" height="167px">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="button" onclick="open_modal()">+</div>
+    <div class="middle">
+        <div class="m_subheader">
+            <div class="m_sb_recente"><a href="/post/home/recent" class="a_href">최신</a></div>
+            <div class="m_sb_suggest"><a href="/post/home/suggest" class="a_href">추천</a></div>
+            <div class="m_sb_following"><a href="/post/home/following" class="a_href">팔로잉</a></div>
+        </div>
+    </div>
+    {% block content %}{% endblock %}
+    </div>
+
 </body>
 <script src={% static 'js/main.js' %}></script>
+
 </html>

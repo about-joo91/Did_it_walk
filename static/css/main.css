@@ -19,6 +19,11 @@ html {
 
 }
 
+.delete_color {
+    text-decoration: none;
+    ;
+}
+
 /* 모달부분 */
 .upload_modal_background {
     background: rgba(0, 0, 0, 0.7);
@@ -87,6 +92,7 @@ html {
     justify-content: center;
     width: 24rem;
 }
+
 .upload_file_image {
     visibility: visible;
     z-index: 5;
@@ -206,7 +212,7 @@ html {
     border-bottom-right-radius: 20px;
 }
 
-.bt_pm_b_bd_follow{
+.bt_pm_b_bd_follow {
     width: 85%;
     height: 20%;
     border: 1px solid black;
