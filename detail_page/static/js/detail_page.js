@@ -40,7 +40,7 @@ const csrftoken = get_cookie('csrftoken')
 const like_button = document.querySelector('.heart_btn')
 const dc_ch_b_leng = document.querySelector('.dc_ch_b_leng')
 async function like(post_id) {
-    const result = await fetch(base_url + '/post/like/' + post_id, {
+    const result = await fetch(base_url + '/detail_page/like/' + post_id, {
         method: 'POST',
         headers: {
             'Aceept': 'application/json',
@@ -58,9 +58,8 @@ async function like(post_id) {
         }
     }
 }
-
+//  comment가 비어있을 때
 const comment_form = document.getElementById('comment_form')
-
 comment_form.addEventListener('submit', function (e) {
     if (document.getElementById('comment_input').value == '') {
         alert('댓글을 적어주세요!')
@@ -68,9 +67,29 @@ comment_form.addEventListener('submit', function (e) {
     }
 })
 
+//  comment 작성
+const comment_btn = document.querySelector('.comment_btn');
+async function comment_save(post_id) {
+    const comment_input_value = document.getElementById('comment_input').value;
+    const result = await fetch(base_url + '/post/comment/' + post_id, {
+        method: 'POST',
+        headers: {
+            'Aceept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+        },
+        body: JSON.stringify({
+            "content": comment_input_value
+        })
+    })
+    if (result.ok) {
+        location.reload()
+    }
+}
+
 async function comment_delete(post_id, comment_id) {
     const result = await fetch(base_url + '/post/comment/' + post_id + '/' + comment_id, {
-        method: 'POST',
+        method: 'DELETE',
         headers: {
             'Aceept': 'application/json',
             'Content-Type': 'application/json',
@@ -82,15 +101,29 @@ async function comment_delete(post_id, comment_id) {
     }
 }
 
-function edit_ready(comment_id, content) {
+function edit_ready(post_id, comment_id, content) {
     const dc_cb_content_box = document.getElementById('dc_cb_content_box_' + comment_id)
     dc_cb_content_box.innerHTML = `
-    <form method="post" action="${base_url}/post/comment/edit/${comment_id}" type="submit" name="comment_edit_form${comment_id}" id="comment_edit_form${comment_id}">
-    <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
-    <textarea name="edit_box" class="edit_box" id = "new_content_${comment_id}" placeholder="${content}"></textarea>
-    </form>`
+    <textarea name="edit_box" class="edit_box" id = "new_content_${comment_id}" placeholder="${content}"></textarea>`
     const dc_cb_button_box = document.getElementById('dc_cb_button_box_' + comment_id)
-    dc_cb_button_box.innerHTML = `<button class="edit_submit_btn" type="submit" form="comment_edit_form${comment_id}">확인</button>`
+    dc_cb_button_box.innerHTML = `<button class="edit_submit_btn" onclick="comment_edit(${post_id},${comment_id})">확인</button>`
 }
 
+async function comment_edit(post_id, comment_id) {
+    const edit_box = document.querySelector('.edit_box');
+    const result = await fetch(base_url + '/post/comment/' + post_id + '/' + comment_id, {
+        method: 'PUT',
+        headers: {
+            'Aceept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+        },
+        body: JSON.stringify({
+            "content": edit_box.value
+        })
 
+    })
+    if (result.ok) {
+        location.reload()
+    }
+}

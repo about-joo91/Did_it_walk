@@ -89,7 +89,6 @@ const csrftoken = get_cookie('csrftoken')
 
 const like_count = document.querySelector(".like_count")
 async function like(post_id) {
-    const like_button = document.querySelector('.heart_btn_' + post_id)
     const result = await fetch(base_url + '/post/like/' + post_id, {
         method: 'POST',
         mode: 'same-origin',
@@ -100,13 +99,7 @@ async function like(post_id) {
         }
     })
     if (result.ok) {
-        if (like_button.classList.contains("bi-heart-fill")) {
-            like_button.classList.replace('bi-heart-fill', 'bi-heart')
-            like_count.innerText - parseInt(like_count.innerText) - 1
-        } else {
-            like_button.classList.replace('bi-heart', 'bi-heart-fill')
-            like_count.innerText - parseInt(like_count.innerText) + 1
-        }
+        location.reload()
     }
 }
 

@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render, redirect
 from .models import PostImg, Post, Likes, ShoeTag, Comments
 from user.models import UserModel
@@ -5,7 +6,9 @@ from django.contrib import messages
 import config
 import boto3
 from shoes_tag.recommand_md import recommendation
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 # Create your views here.
 def home(request):
     if request.user.is_authenticated:
@@ -17,10 +20,9 @@ def main(request, page_name = 'recent'):
     user = request.user
     if request.method == 'GET':
         all_shoe_list = ShoeTag.objects.all()
+        
         if page_name == "recent":
             total_datas = recent_post_data(request.user)
-            
-
         elif page_name == "following":
             total_datas = following_post_data(request.user)
 
@@ -194,35 +196,34 @@ def suggest_post_data(user):
     return total_datas
 
 
-
-def like(request, post_id):
-    if request.method == 'POST':
+class LikeView(APIView):
+    def post(self, request,post_id):
         cur_user = request.user
         post = Post.objects.get(id= post_id)
         like_obj, create = Likes.objects.get_or_create(user= cur_user, post = post)
         if not create:
             like_obj.delete()
-        else:
-            pass
-        return redirect('/')
-        
-def comment(request, post_id, comment_id = None):
-    content = request.POST.get('comment_input')
-    if comment_id:
-        Comments.objects.get(id = comment_id).delete()
-    else:
+        return Response({},status=status.HTTP_200_OK)
+    
+class ComentView(APIView):
+    def post(self, request, post_id, comment_id=None):
         cur_user = request.user
+        new_content = request.data.get('content')
+        print(new_content)
         post = Post.objects.get(id = post_id)
-        new_comment = Comments.objects.create(post=post, user = cur_user, content = content)
+        new_comment = Comments.objects.create(post=post, user = cur_user, content = new_content)
         new_comment.save()
-    return redirect('/detail_page/'+ str(post_id))
-
-def comment_edit(request, comment_id):
-    new_content = request.POST.get('edit_box')
-    comment = Comments.objects.filter(id = comment_id)
-    comment.update(content = new_content)
-    post_id = comment[0].post.id
-    return redirect('/detail_page/'+str(post_id))
+        return Response({},status=status.HTTP_200_OK)
+    def put(self, request,post_id, comment_id):
+        new_content = request.data.get('content')
+        comment = Comments.objects.get(id = comment_id)
+        comment.content = new_content
+        comment.save()
+        return Response({},status=status.HTTP_200_OK)
+    def delete(self, request, post_id, comment_id):
+        delete_comment = Comments.objects.get(id = comment_id)
+        delete_comment.delete()
+        return Response({},status=status.HTTP_200_OK)
 
 def edit_content(request, post_id):
     new_content = request.POST.get('edit_content_text')

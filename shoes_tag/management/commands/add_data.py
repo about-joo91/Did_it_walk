@@ -1,4 +1,3 @@
-from ast import Is
 import pandas as pd
 from post.models import ShoeTag
 from itertools import islice
