@@ -1,24 +1,28 @@
+import boto3
+import config
+
 from django.shortcuts import render, redirect
 from django.contrib import auth
 from .models import UserModel
 from django.contrib.auth.decorators import login_required
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
 from post.models import Post, ShoeTag
-import boto3
-import config
+from .serializers import UserSerializer
 
 # Create your views here.
+
+
+class UserCotrol(APIView):
+    def post(self, request):
+        user_serializer = UserSerializer(data = request.data)
+        if user_serializer.is_valid():
+            user_serializer.save()
+            return Response(user_serializer.data, status=status.HTTP_200_OK)
+        return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 def sign_up(request):
-    if request.method == 'POST':
-        username = request.POST.get('new_username',None)
-        password = request.POST.get('new_password',None)
-        nickname = request.POST.get('nickname',None)
-        new_user = UserModel.objects.create_user(
-            username = username,
-            password = password,
-            nickname = nickname
-        )
-        new_user.save()
-        return redirect('/user/sign_in/')
     return render(request, 'user/sign_up.html')
 
 def sign_in(request):

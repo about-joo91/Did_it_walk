@@ -206,22 +206,22 @@ class LikeView(APIView):
         return Response({},status=status.HTTP_200_OK)
     
 class ComentView(APIView):
-    def post(self, request, post_id, comment_id=None):
+    def post(self, request, pk):
         cur_user = request.user
         new_content = request.data.get('content')
         print(new_content)
-        post = Post.objects.get(id = post_id)
+        post = Post.objects.get(pk = pk)
         new_comment = Comments.objects.create(post=post, user = cur_user, content = new_content)
         new_comment.save()
         return Response({},status=status.HTTP_200_OK)
-    def put(self, request,post_id, comment_id):
+    def put(self, request, pk):
         new_content = request.data.get('content')
-        comment = Comments.objects.get(id = comment_id)
+        comment = Comments.objects.get(pk = pk)
         comment.content = new_content
         comment.save()
         return Response({},status=status.HTTP_200_OK)
-    def delete(self, request, post_id, comment_id):
-        delete_comment = Comments.objects.get(id = comment_id)
+    def delete(self, request,pk):
+        delete_comment = Comments.objects.get(pk = pk)
         delete_comment.delete()
         return Response({},status=status.HTTP_200_OK)
 

@@ -88,7 +88,7 @@ async function comment_save(post_id) {
 }
 
 async function comment_delete(post_id, comment_id) {
-    const result = await fetch(base_url + '/post/comment/' + post_id + '/' + comment_id, {
+    const result = await fetch(base_url + '/post/comment/' + comment_id, {
         method: 'DELETE',
         headers: {
             'Aceept': 'application/json',
@@ -111,7 +111,7 @@ function edit_ready(post_id, comment_id, content) {
 
 async function comment_edit(post_id, comment_id) {
     const edit_box = document.querySelector('.edit_box');
-    const result = await fetch(base_url + '/post/comment/' + post_id + '/' + comment_id, {
+    const result = await fetch(base_url + '/post/comment/' + comment_id, {
         method: 'PUT',
         headers: {
             'Aceept': 'application/json',

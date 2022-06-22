@@ -1,5 +1,4 @@
 var base_url = window.location.origin;
-
 function get_cookie(name) {
     let cookie_value = null;
 

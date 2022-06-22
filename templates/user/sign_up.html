@@ -1,14 +1,13 @@
 {% extends 'user/user_base.html' %}
 
 {% block content %}
-<form method="post" action={% url 'sign_up'%}>
-    {% csrf_token %}
-    <label class="sign_up_label" for="new_username">이메일 주소</label>
-    <input class="user_input" type="email" id="new_username" name="new_username">
+<div>
+    <label class="sign_up_label" for="username">이메일 주소</label>
+    <input class="user_input" type="email" id="new_username" name="username">
     <label class="sign_up_label" for="new_password">비밀번호</label>
-    <input class="user_input" type="password" id="new_password" name="new_password">
+    <input class="user_input" type="password" id="new_password" name="password">
     <label class="sign_up_label" for="nickname">닉네임</label>
-    <input class="user_input" type="text" id="nickname" name="nickname">
-    <button class="sign_up_btn" type="submit">회원가입</button>
-</form>
+    <input class="user_input" type="text" id="new_nickname" name="nickname">
+    <button class="sign_up_btn" onclick="sign_up()">회원가입</button>
+</div>
 {% endblock %}
